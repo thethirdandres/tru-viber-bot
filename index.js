@@ -20,7 +20,7 @@ require('dotenv').config();
 
 const bot = new ViberBot({
     authToken: process.env.VIBER_AUTHTOKEN,
-    name: `Robinsons Department Store`,
+    name: "Toys\"R\"Us Philippines",
     avatar: `https://firebasestorage.googleapis.com/v0/b/rds-staging.appspot.com/o/robinsons%20logo.png?alt=media&token=dc18c15d-eb29-46aa-a8dc-3b71d8debe79`
 })
 
