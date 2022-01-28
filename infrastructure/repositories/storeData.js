@@ -30,7 +30,7 @@ module.exports = class StoreData {
 
     static async setUserProfile(userID, userName) {
         // returns false if userProfile is set - meaning it has no duplicates
-        const vc = db.collection('ViberCustomers').doc(userID);
+        const vc = db.collection('TRU-ViberCustomers').doc(userID);
         await vc.get().then((doc) => {
             if(!doc.exists) {
                 vc.set({
@@ -48,7 +48,7 @@ module.exports = class StoreData {
     }
 
     static async setUserDetails(userId) {
-        let document = db.collection("ViberCustomers").where('userId', '==', userId).get();
+        let document = db.collection("TRU-ViberCustomers").where('userId', '==', userId).get();
         if (document && document.exists) {
             await document.update({
                 last_message_entry: new Date().toISOString()

@@ -16,7 +16,6 @@ module.exports = class Responder {
 
     static genGetStartedButtonElements() {
         let getStartedButtonElements = Composer.composeGetStartedButtonElements();
-        console.log("getstartedbutton: ", getStartedButtonElements);
         return getStartedButtonElements;
     }
 
