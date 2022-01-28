@@ -26,12 +26,12 @@ module.exports = class Receiver {
             //             payload == "VISAYAS" ||
             //             payload == "MINDANAO") {
             //     response = (await Responder.genStoreElements(payload));
-            // } else if(payload == "LEARN MORE") {
-            //     response = (Responder.genLearnMoreElements());
+            } else if(payload == "LEARN MORE") {
+                response = (Responder.genLearnMoreElements());
             // } else if(payload == "SHOP ONLINE") {
             //     response = (Responder.genShopOnlineElements())
-            // } else if (payload == "~") {
-            //     console.log("user clicked dummy button");
+            } else if (payload == "~") {
+                console.log("user clicked dummy button");
             // } else if(payload.startsWith("STORE_CONTACT_NUMBER")) {
             //     console.log('It works!');
             //     response = (Responder.genHandoffMsg(payload));

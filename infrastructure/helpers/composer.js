@@ -54,6 +54,33 @@ module.exports = class Composer {
         return [mainMenuMsgElement, mainMenuElement];
     }
 
+    static composeLearnMoreElements() {
+        let learnMoreMsgElement = TemplateBuilder.buildTextMessage('Sure! 👍 What would you like to learn more about?');
+
+        let promosEvents = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Spooktacular-Halloween%20(1019).jpg", 6, 5, true, "none", "Promos and Events", "Select", 6, 1, true, "open-url", "https://toysrus.com.ph/promos/virtualhalloween");
+        let howShopPlay = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/CSP-HowItWorks%20(1019).jpg", 6, 5, true, "none","How to Call Shop Play?", "Select", 6, 1, true, "open-url", "https://toysrus.com.ph/callshopplay");
+        let returnExchange = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Return-and-Exchange%20(1019).jpg", 6, 5, true, "none","Return and Exchange Policy", "Select", 6, 1, true, "open-url", "https://toysrus.com.ph/services");
+        const cards = [learnMoreMsgElement, promosEvents[0], promosEvents[1], promosEvents[2], howShopPlay[0], howShopPlay[1], howShopPlay[2], returnExchange[0], returnExchange[1], returnExchange[2]];
+
+
+        let learnMoreBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);
+        let learnMoreElement = TemplateBuilder.buildRichMediaMessage(learnMoreBuild);
+
+        return learnMoreElement;
+    }
+
+
+// ========================================================================
+
+
+
+
+
+
+
+
+
+
     static composeErrorMsgElements() {
         let errorText = "Hey there! 👋 Thanks for reaching out; we're here to help you with your shopping inquiries. 😊 Let us know if you want to talk to our personal shopper 🛍 or you can call us at 0917LOVEROB (09175683762) 📲 \n\n If you want to check out your options, click on \"Main Menu\" 👇";
         let errorTextElement = TemplateBuilder.buildTextTemplate(errorText, 6, 6);
@@ -92,17 +119,7 @@ module.exports = class Composer {
         return [chooseStoreMsgElement, chooseStoreElement];
     }
 
-    static composeLearnMoreElements() {
-        let wsfy = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/general/img_weshopforyou.jpg", 6, 5, true,"none", "How to order via We Shop For You", "Select", 6, 1, true, "open-url", "https://www.robinsonsdepartmentstore.com.ph/we-shop-for-you");
-        let bus=  TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/general/img_robbusinesscenter.jpg", 6, 5, true,"none","Learn about the Business Center", "Select", 6, 1, true, "open-url", "https://www.facebook.com/RobinsonsBusinessCenter");
-        const cards = [wsfy[0], wsfy[1], wsfy[2], bus[0], bus[1], bus[2],];
-
-
-        let learnMoreBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);
-        let learnMoreElement = TemplateBuilder.buildRichMediaMessage(learnMoreBuild);
-
-        return learnMoreElement;
-    }
+    
 
     static composeShopOnlineElements() {
         let goRob = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/general/GoRobinsons%20Chatbot.jpg", 6, 5, true, "none", "GoRobinsons", "Shop at GoRobinsons", 6, 1, true,  "open-url", "https://departmentstore.gorobinsons.ph/");

@@ -102,7 +102,7 @@ module.exports = class TemplateBuilder {
                     "Silent": true,
                     "ActionType": "reply",
                     "ActionBody": "~",
-                    "BgColor": "#da251c",
+                    "BgColor": "#000000",
                 },
                 {
                     "Columns": 1,
@@ -128,7 +128,7 @@ module.exports = class TemplateBuilder {
                     "Silent": true,
                     "ActionType": "reply",
                     "ActionBody": "~",
-                    "BgColor": "#da251c",
+                    "BgColor": "#000000",
                 },
             ]
         };
