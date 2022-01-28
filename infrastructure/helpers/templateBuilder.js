@@ -96,18 +96,8 @@ module.exports = class TemplateBuilder {
             "Type": "keyboard",
             "InputFieldState": "hidden",
             "Buttons": [
-                // {
-                //     'Columns': 6,
-                //     'Rows': 6,
-                //     'Text': `<font color=\'#FFFFFF\'>${text}</font>`,
-                //     'BgColor': "#3f4c5c",
-                //     'ActionType': 'none',
-                //     'TextSize': 'large',
-                //     'TextVAlign': 'middle',
-                //     'TextHAlign': 'center'
-                // },
                 {
-                    "Columns": 1,
+                    "Columns": 2,
                     "Rows": 1,
                     "Silent": true,
                     "ActionType": "reply",
@@ -128,30 +118,12 @@ module.exports = class TemplateBuilder {
                     "Rows": 1,
                     "Silent": true,
                     "ActionType": "reply",
-                    "ActionBody": "List of Stores",
-                    "Image": "https://storage.googleapis.com/avigate-img-resources/keyboard_buttons/Stores.jpg",
-                    "ImageScaleType": "fill"
-                },
-                {
-                    "Columns": 1,
-                    "Rows": 1,
-                    "Silent": true,
-                    "ActionType": "reply",
-                    "ActionBody": "Shop Online",
-                    "Image": "https://storage.googleapis.com/avigate-img-resources/keyboard_buttons/Shop.jpg",
-                    "ImageScaleType": "fill"
-                },
-                {
-                    "Columns": 1,
-                    "Rows": 1,
-                    "Silent": true,
-                    "ActionType": "reply",
                     "ActionBody": "Learn More",
                     "Image": "https://storage.googleapis.com/avigate-img-resources/keyboard_buttons/Learn.jpg",
                     "ImageScaleType": "fill"
                 },
                 {
-                    "Columns": 1,
+                    "Columns": 2,
                     "Rows": 1,
                     "Silent": true,
                     "ActionType": "reply",
