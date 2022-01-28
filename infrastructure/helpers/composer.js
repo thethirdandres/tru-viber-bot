@@ -45,7 +45,7 @@ module.exports = class Composer {
         let slButtons1 = TemplateBuilder.buildButtonTemplate("Lazada", 6, 1, true, "open-url", "https://www.lazada.com.ph/shop/toys-r-us");
         let slButtons2 = TemplateBuilder.buildButtonTemplate("Shopee", 6, 1, false, "open-url", "https://shopee.ph/toysrusph");
 
-        const cards = [asImage, asTitle, asButtons1, asButtons2, rob[0], rob[1], rob[2], sho[0], sho[1], slImage, slTitle, slButtons1, slButtons2];
+        const cards = [asImage, asTitle, asButtons1, asButtons2, rob[0], rob[1], rob[2], slImage, slTitle, slButtons1, slButtons2];
 
 
         let mainMenuElementBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);
