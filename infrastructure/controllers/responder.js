@@ -41,17 +41,22 @@ module.exports = class Responder {
         return [mainMenuMsgElement, mainMenuElement];
     }
 
+    static genLearnMoreElements() {
+        let learnMoreElement = Composer.composeLearnMoreElements();
+
+        return [learnMoreElement];
+    }
+    
     static genChooseStoreElements() {
         let chooseStoreMsgElements = Composer.composeChooseStoreElements();
 
         return [chooseStoreMsgElements];
     }
 
-    static genLearnMoreElements() {
-        let learnMoreElement = Composer.composeLearnMoreElements();
 
-        return [learnMoreElement];
-    }
+
+
+    // ===================================================
 
     static genShopOnlineElements() {
         let shopOnlineElement = Composer.composeShopOnlineElements();

@@ -69,6 +69,24 @@ module.exports = class Composer {
         return [learnMoreMsgElement, learnMoreElement];
     }
 
+    static composeChooseStoreElements() {
+        let chooseStoreMsgElement = TemplateBuilder.buildTextMessage('Swipe ➡ through the options below 👇');
+        
+        let metroManila = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/tru-stores/chatbot-pic-makati.jpg", 6, 5, true, "none", "Find stores in Metro Manila", "Metro Manila", 6, 1, false, "reply", "Metro Manila");
+        
+        let luzon = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/tru-stores/chatbot-pic-makati.jpg", 6, 5, true, "none", "Find stores in Luzon", "Luzon", 6, 1, false, "reply", "Luzon");
+        
+        let visMin = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/tru-stores/chatbot-pic-cebu.jpg", 6, 5, true, "none", "Find stores in Visayas and Mindanao", "Visayas & Mindanao", 6, 1, false, "reply", "VisMin");
+        
+        const cards = [metroManila[0], metroManila[1], metroManila[2], luzon[0], luzon[1], luzon[2], visMin[0], visMin[1], visMin[2]];
+
+        
+        let chooseStoreBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);
+        let chooseStoreElement = TemplateBuilder.buildRichMediaMessage(chooseStoreBuild);
+
+        return [chooseStoreMsgElement, chooseStoreElement];
+    }
+
 
 // ========================================================================
 
@@ -96,28 +114,7 @@ module.exports = class Composer {
         return [errorMsgElement];
     }
     
-    static composeChooseStoreElements() {
-        let chooseStoreMsgElement = TemplateBuilder.buildTextMessage('Swipe ➡ through the options below 👇');
-        
-        let metroManila = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/general/img_metromanila.jpg", 6, 5, true, "none", "Find stores in Metro Manila", "Metro Manila", 6, 1, false, "reply", "Metro Manila");
-        
-        let northLuzon = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/general/img_northluzon.jpg", 6, 5, true, "none", "Find stores in North Luzon", "North Luzon", 6, 1, false, "reply", "North Luzon");
-        
-        let southLuzon = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/general/img_southluzon.jpg", 6, 5, true, "none", "Find stores in South Luzon", "South Luzon", 6, 1, false, "reply", "South Luzon");
-        
-        let visayas = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/general/img_visayas.jpg",  6, 5, true, "none", "Find stores in Visayas", "Visayas", 6, 1, false, "reply", "Visayas");
-        
-        let mindanao = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/general/img_mindanao.jpg",  6, 5, true, "none","Find stores in Mindanao", "Mindanao", 6, 1, false, "reply", "Mindanao");
-        
-        // const cards = [metroManila[0], metroManila[1], metroManila[2], northLuzon[0], northLuzon[1], northLuzon[2], southLuzon[0], southLuzon[1], southLuzon[2]];
-        const cards = [metroManila[0], metroManila[1], metroManila[2], northLuzon[0], northLuzon[1], northLuzon[2], southLuzon[0], southLuzon[1], southLuzon[2], visayas[0], visayas[1], visayas[2], mindanao[0], mindanao[1], mindanao[2]];
-
-        
-        let chooseStoreBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);
-        let chooseStoreElement = TemplateBuilder.buildRichMediaMessage(chooseStoreBuild);
-
-        return [chooseStoreMsgElement, chooseStoreElement];
-    }
+    
 
     
 

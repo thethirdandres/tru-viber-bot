@@ -18,8 +18,8 @@ module.exports = class Receiver {
                 response = Responder.genGetStartedMsgElements();
             } else if(payload == "MAIN MENU") {
                 response = (Responder.genMainMenuElements());
-            // } else if(payload == "CHOOSE STORE" || payload == "LIST OF STORES") {
-            //     response = (Responder.genChooseStoreElements());
+            } else if(payload == "CHOOSE STORE" || payload == "LIST OF STORES") {
+                response = (Responder.genChooseStoreElements());
             // } else if(payload == "METRO MANILA" || 
             //             payload == "NORTH LUZON" || 
             //             payload == "SOUTH LUZON" ||
