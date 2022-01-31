@@ -60,6 +60,13 @@ module.exports = class Responder {
         return [storeElement];
     }
 
+    static genHandoffMsg(payload) {
+        let handoffMsg = Composer.composeHandoffMsg(payload);
+
+        return [handoffMsg];
+    }
+
+
 
     // ===================================================
 
@@ -67,12 +74,6 @@ module.exports = class Responder {
         let shopOnlineElement = Composer.composeShopOnlineElements();
 
         return [shopOnlineElement];
-    }
-
-    static genHandoffMsg(payload) {
-        let handoffMsg = Composer.composeHandoffMsg(payload);
-
-        return [handoffMsg];
     }
 
 

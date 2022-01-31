@@ -26,11 +26,8 @@ module.exports = class Receiver {
                 response = (await Responder.genStoreElements(payload));
             } else if(payload == "LEARN MORE") {
                 response = (Responder.genLearnMoreElements());
-            // } else if(payload == "SHOP ONLINE") {
-            //     response = (Responder.genShopOnlineElements())
-            // } else if(payload.startsWith("STORE_CONTACT_NUMBER")) {
-            //     console.log('It works!');
-            //     response = (Responder.genHandoffMsg(payload));
+            } else if(payload.startsWith("STORE_CONTACT_NUMBER")) {
+                response = (Responder.genHandoffMsg(payload));
             } else {
                 response = (Responder.genErrorMsgElements());
             }

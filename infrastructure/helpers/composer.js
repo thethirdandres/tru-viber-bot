@@ -95,6 +95,27 @@ module.exports = class Composer {
     }
 
 
+    static composeErrorMsgElements() {
+        let errorText = "Woops, I didn’t quite get that 😅, I'm just a bot 🤖 and still learning. Do you want to chat 💬 with a personal shopper instead? Or maybe back to main menu 🗂️?";
+        let errorTextElement = TemplateBuilder.buildTextTemplate(errorText, 6, 6);
+        let errorQuickReplies1 = TemplateBuilder.buildButtonTemplate("Talk to Shopper" ,3, 1, true, "open-url", "viber://chat?number=%2B639171118697");
+        let errorQuickReplies2 = TemplateBuilder.buildButtonTemplate("Main Menu", 3, 1, false, "reply", "Main Menu");
+        
+        const cards = [errorTextElement, errorQuickReplies1, errorQuickReplies2];
+
+        
+        let errorMsgBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);
+        let errorMsgElement = TemplateBuilder.buildRichMediaMessage(errorMsgBuild);
+
+        return [errorMsgElement];
+    }
+    
+    static composeHandoffMsg(payload) {
+        let handoffMsg = TemplateBuilder.buildRichMediaMessage(Factory.getHandOffDialogue(payload));
+
+        return handoffMsg;
+    }
+
 // ========================================================================
 
 
@@ -106,20 +127,7 @@ module.exports = class Composer {
 
 
 
-    static composeErrorMsgElements() {
-        let errorText = "Hey there! 👋 Thanks for reaching out; we're here to help you with your shopping inquiries. 😊 Let us know if you want to talk to our personal shopper 🛍 or you can call us at 0917LOVEROB (09175683762) 📲 \n\n If you want to check out your options, click on \"Main Menu\" 👇";
-        let errorTextElement = TemplateBuilder.buildTextTemplate(errorText, 6, 6);
-        let errorQuickReplies1 = TemplateBuilder.buildButtonTemplate("Talk to Shopper" ,3, 1, true, "open-url", "viber://chat?number=%2B639175683762");
-        let errorQuickReplies2 = TemplateBuilder.buildButtonTemplate("Main Menu", 3, 1, false, "reply", "Main Menu");
-        
-        const cards = [errorTextElement, errorQuickReplies1, errorQuickReplies2];
-
-        
-        let errorMsgBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);
-        let errorMsgElement = TemplateBuilder.buildRichMediaMessage(errorMsgBuild);
-
-        return [errorMsgElement];
-    }
+    
     
     
 
@@ -139,11 +147,6 @@ module.exports = class Composer {
         return shopOnlineElement;
     }
     
-    static composeHandoffMsg(payload) {
-        let handoffMsg = TemplateBuilder.buildRichMediaMessage(Factory.getHandOffDialogue(payload));
-
-        return handoffMsg;
-    }
 
     
 
