@@ -25,8 +25,9 @@ module.exports = class Helper {
         let snapshot = await StoreData.getStoresPerRegion(region);
         let row = Math.round(StoreData.maxStoreNum/2);
         let ctr = row;
+        row = row > 7 ? 7 : row;
         snapshot.forEach(async (doc) => {
-            if(ctr > 12) {
+            if(ctr > 14) {
                 result.push(
                     {
                         'Columns': 3,
@@ -52,13 +53,14 @@ module.exports = class Helper {
                 );
             }
 
-            ctr++;
+            ctr--;
             
         });
 
         // CHANGE THIS WITHOUT USING CAROUSELCOMPOSER
         let stores = new CarouselComposer('#D3D3D3', row);
         stores.addCarouselElement(result);
+        stores.addCarouselElement(result2);
 
         return stores.build();
     }
