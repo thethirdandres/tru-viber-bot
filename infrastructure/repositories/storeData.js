@@ -15,8 +15,8 @@ module.exports = class StoreData {
     static maxStoreNum = 0;
 
     static async getStoresPerRegion(region) {
-        const rds_snapshot = await db.collection("Tenant").where("parent", "==", "108870114890548").where("region", "==", region).orderBy("order").get();
-        // const ent_snapshot = await db.collection("Tenant").where("parent", "==", "ULoEpwWoNTS8k8IMAEId").where("region", "==", region).orderBy("order").get();
+        const rds_snapshot = await db.collection("TemporaryTenant").where("parent", "==", "108870114890548").where("region", "==", region).orderBy("order").get();
+        const ent_snapshot = await db.collection("TemporaryTenant").where("parent", "==", "ULoEpwWoNTS8k8IMAEId").where("region", "==", region).orderBy("order").get();
         if(ent_snapshot.empty && rds_snapshot.empty) {
             console.log('No matching documents.');
             return;
