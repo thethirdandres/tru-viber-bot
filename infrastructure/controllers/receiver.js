@@ -20,18 +20,14 @@ module.exports = class Receiver {
                 response = (Responder.genMainMenuElements());
             } else if(payload == "CHOOSE STORE" || payload == "LIST OF STORES") {
                 response = (Responder.genChooseStoreElements());
-            // } else if(payload == "METRO MANILA" || 
-            //             payload == "NORTH LUZON" || 
-            //             payload == "SOUTH LUZON" ||
-            //             payload == "VISAYAS" ||
-            //             payload == "MINDANAO") {
-            //     response = (await Responder.genStoreElements(payload));
+            } else if(payload == "METRO MANILA" || 
+                        payload == "LUZON" || 
+                        payload == "VISMIN") {
+                response = (await Responder.genStoreElements(payload));
             } else if(payload == "LEARN MORE") {
                 response = (Responder.genLearnMoreElements());
             // } else if(payload == "SHOP ONLINE") {
             //     response = (Responder.genShopOnlineElements())
-            } else if (payload == "~") {
-                console.log("user clicked dummy button");
             // } else if(payload.startsWith("STORE_CONTACT_NUMBER")) {
             //     console.log('It works!');
             //     response = (Responder.genHandoffMsg(payload));

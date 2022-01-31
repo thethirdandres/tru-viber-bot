@@ -43,7 +43,7 @@ module.exports = class Composer {
         let slImage = TemplateBuilder.buildImageTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/laz-shopee_3%20(1005).jpg", 6, 4, true, "none");
         let slTitle = TemplateBuilder.buildTitleTemplate("Shop at our online stores");
         let slButtons1 = TemplateBuilder.buildButtonTemplate("Lazada", 6, 1, true, "open-url", "https://www.lazada.com.ph/shop/toys-r-us");
-        let slButtons2 = TemplateBuilder.buildButtonTemplate("Shopee", 6, 1, false, "open-url", "https://shopee.ph/toysrusph");
+        let slButtons2 = TemplateBuilder.buildButtonTemplate("Shopee", 6, 1, true, "open-url", "https://shopee.ph/toysrusph");
 
         const cards = [asImage, asTitle, asButtons1, asButtons2, rob[0], rob[1], rob[2], slImage, slTitle, slButtons1, slButtons2];
 
@@ -74,7 +74,7 @@ module.exports = class Composer {
         
         let metroManila = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/tru-stores/chatbot-pic-makati.jpg", 6, 5, true, "none", "Find stores in Metro Manila", "Metro Manila", 6, 1, false, "reply", "Metro Manila");
         
-        let luzon = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/tru-stores/chatbot-pic-makati.jpg", 6, 5, true, "none", "Find stores in Luzon", "Luzon", 6, 1, false, "reply", "Luzon");
+        let luzon = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/tru-stores/chatbot-pic-vigan.jpg", 6, 5, true, "none", "Find stores in Luzon", "Luzon", 6, 1, false, "reply", "Luzon");
         
         let visMin = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/tru-stores/chatbot-pic-cebu.jpg", 6, 5, true, "none", "Find stores in Visayas and Mindanao", "Visayas & Mindanao", 6, 1, false, "reply", "VisMin");
         
@@ -85,6 +85,13 @@ module.exports = class Composer {
         let chooseStoreElement = TemplateBuilder.buildRichMediaMessage(chooseStoreBuild);
 
         return [chooseStoreMsgElement, chooseStoreElement];
+    }
+
+    static async composeStoreElement(payload) {
+        let storeElementBuild = await Helper.getStoreElement(payload);
+        let storeElement = TemplateBuilder.buildRichMediaMessage(storeElementBuild);
+
+        return storeElement;
     }
 
 
@@ -138,11 +145,6 @@ module.exports = class Composer {
         return handoffMsg;
     }
 
-    static async composeStoreElement(payload) {
-        let storeElementBuild = await Helper.getStoreElement(payload);
-        let storeElement = TemplateBuilder.buildRichMediaMessage(storeElementBuild);
-
-        return storeElement;
-    }
+    
 
 }

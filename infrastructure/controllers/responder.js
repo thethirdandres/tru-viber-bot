@@ -54,6 +54,11 @@ module.exports = class Responder {
     }
 
 
+    static async genStoreElements(payload) {
+        let storeElement = await Composer.composeStoreElement(payload);
+
+        return [storeElement];
+    }
 
 
     // ===================================================
@@ -70,10 +75,5 @@ module.exports = class Responder {
         return [handoffMsg];
     }
 
-    static async genStoreElements(payload) {
-        let storeElement = await Composer.composeStoreElement(payload);
-
-        return [storeElement];
-    }
 
 }
