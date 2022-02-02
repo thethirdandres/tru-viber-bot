@@ -55,7 +55,7 @@ module.exports = class StoreData {
             });
         }
         else {
-            await db.collection("ViberCustomers").add({
+            await db.collection("TRU-ViberCustomers").add({
                 userId: userId,
                 last_message_entry: new Date().toISOString()
             });
