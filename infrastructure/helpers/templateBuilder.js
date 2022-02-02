@@ -101,7 +101,7 @@ module.exports = class TemplateBuilder {
                     "Rows": 1,
                     "Silent": true,
                     "ActionType": "none",
-                    "BgColor": "#000000",
+                    "BgColor": "#da251c",
                 },
                 {
                     "Columns": 1,
@@ -126,7 +126,7 @@ module.exports = class TemplateBuilder {
                     "Rows": 1,
                     "Silent": true,
                     "ActionType": "none",
-                    "BgColor": "#000000",
+                    "BgColor": "#da251c",
                 },
             ]
         };
