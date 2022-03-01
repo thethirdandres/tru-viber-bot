@@ -11,9 +11,16 @@ module.exports = class Factory {
         let business_name_raw = payload_tokens.splice(2).join(" ");
         let business_name = Helper.lowerCaseAllWordsExceptFirstLetters(business_name_raw);
 
-        let handOffDialogue = new CarouselComposer('#D3D3D3', 7);
-        handOffDialogue.addCarouselElement(TemplateBuilder.genHandoffMsg(contact_number, business_name))
         
-        return handOffDialogue.build();
+        let handoffText = TemplateBuilder.buildTextTemplate(`You will be redirected to ${chatbot_store_name}'s Personal Shopper. Continue?`, 6, 6);
+        let handoffButton1 = TemplateBuilder.buildButtonTemplate("Confirm", 3, 1, true, "open-url", `viber://chat?number=%2B${contact_number}`);
+        let handoffButton2 = TemplateBuilder.buildButtonTemplate("Main Menu", 3, 1, false, "reply", `Main Menu`);
+        
+
+        const cards = [handoffText, handoffButton1, handoffButton2];
+        let handOffDialogueBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);
+        let handOffDialogueElement = TemplateBuilder.buildRichMediaMessage(handOffDialogueBuild);
+        
+        return handOffDialogueElement;
     }
 }
