@@ -111,7 +111,7 @@ module.exports = class Composer {
     }
     
     static composeHandoffMsg(payload) {
-        let handoffMsg = TemplateBuilder.buildRichMediaMessage(Factory.getHandOffDialogue(payload));
+        let handoffMsg = Factory.getHandOffDialogue(payload);
 
         return [handoffMsg];
     }
