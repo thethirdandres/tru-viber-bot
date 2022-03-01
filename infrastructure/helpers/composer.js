@@ -96,10 +96,9 @@ module.exports = class Composer {
 
 
     static composeErrorMsgElements() {
-        let errorText = "Woops, I didn’t quite get that 😅, I'm just a bot 🤖 and still learning. Do you want to chat 💬 with a personal shopper instead? Or maybe back to main menu 🗂️?";
+        let errorText = "Hey! 👋 Thanks for reaching out. Let us know if you want to talk to our personal shopper 🛍️ for more assistance, or you can give us a call at 0917111TOYS (09171118697). 📲";
         let errorTextElement = TemplateBuilder.buildTextTemplate(errorText, 6, 6);
-        let errorQuickReplies1 = TemplateBuilder.buildButtonTemplate("Talk to Shopper" ,3, 1, true, "open-url", "viber://chat?number=%2B639171118697");
-        let errorQuickReplies2 = TemplateBuilder.buildButtonTemplate("Main Menu", 3, 1, false, "reply", "Main Menu");
+        let errorQuickReplies1 = TemplateBuilder.buildButtonTemplate("Talk to Shopper" ,6, 1, true, "open-url", "viber://chat?number=%2B639171118697");
         
         const cards = [errorTextElement, errorQuickReplies1, errorQuickReplies2];
 
