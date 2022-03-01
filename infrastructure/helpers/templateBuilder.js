@@ -131,13 +131,5 @@ module.exports = class TemplateBuilder {
             ]
         };
     }
-
-    static genHandoffMsg(contact_number, chatbot_store_name) {
-        return [
-            this.buildTextTemplate(`You will be redirected to ${chatbot_store_name}'s Personal Shopper. Continue?`, 6, 6),
-            this.buildButtonTemplate("Confirm", 3, 1, true, "open-url", `viber://chat?number=%2B${contact_number}`),
-            this.buildButtonTemplate("Main Menu", 3, 1, false, "reply", `Main Menu`)
-        ]
-    }
     
 }

@@ -113,7 +113,7 @@ module.exports = class Composer {
     static composeHandoffMsg(payload) {
         let handoffMsg = Factory.getHandOffDialogue(payload);
 
-        return [handoffMsg];
+        return handoffMsg;
     }
 
 // ========================================================================

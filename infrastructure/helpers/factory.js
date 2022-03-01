@@ -21,6 +21,6 @@ module.exports = class Factory {
         let handOffDialogueBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);
         let handOffDialogueElement = TemplateBuilder.buildRichMediaMessage(handOffDialogueBuild);
         
-        return [handOffDialogueElement];
+        return handOffDialogueElement;
     }
 }
