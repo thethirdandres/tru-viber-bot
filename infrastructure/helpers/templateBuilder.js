@@ -131,44 +131,5 @@ module.exports = class TemplateBuilder {
             ]
         };
     }
-
-    static genHandoffMsg(contact_number, business_name) {
-        let text = `You will be redirected to ${business_name}'s Personal Shopper. Continue?`;
-        let buttonText = "Confirm";
-        let buttonText2 = "Main Menu";
-        return [{
-            'Columns': 6,
-            'Rows': 6,
-            'Text': `<font color=\'#FFFFFF\'>${text}</font>`,
-            'BgColor': "#3f4c5c",
-            'ActionType': 'none',
-            'TextSize': 'large',
-            'TextVAlign': 'middle',
-            'TextHAlign': 'center'
-        }, {
-            'Columns': 3,
-            'Rows': 1,
-            'Silent': true,
-            'Text': `<b><font color=\'#191970\'>${buttonText}</font></b>`,
-            'TextSize': 'medium',
-            'TextHAlign': 'center',
-            'TextVAlign': 'middle',
-            'ActionType': 'open-url',
-            'ActionBody': `viber://chat?number=%2B${contact_number}`,
-            'BgColor': '#D3D3D3'
-        }, {
-            'Columns': 3,
-            'Rows': 1,
-            'Silent': true,
-            'Text': `<b><font color=\'#191970\'>${buttonText2}</font></b>`,
-            'TextSize': 'medium',
-            'TextHAlign': 'center',
-            'TextVAlign': 'middle',
-            'ActionType': 'reply',
-            'ActionBody': buttonText2,
-            'BgColor': '#D3D3D3'
-        }
-        ];
-    }
     
 }

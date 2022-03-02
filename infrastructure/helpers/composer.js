@@ -33,7 +33,7 @@ module.exports = class Composer {
     static composeMainMenuElements() {
         let mainMenuMsgElement = TemplateBuilder.buildTextMessage('How can we help you today?');
         
-        let asImage = TemplateBuilder.buildImageTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/CSP-Hotline.jpg", 6, 4, true, "none");
+        let asImage = TemplateBuilder.buildImageTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/CALL%20SHOP%20PLAY%20x%20HOTLINE%20KV.jpg", 6, 4, true, "none");
         let asTitle = TemplateBuilder.buildTitleTemplate("Assisted Shopping");
         let asButtons1 = TemplateBuilder.buildButtonTemplate("Call 0917111TOYS", 6, 1, true, "open-url", "viber://chat?number=%2B639171118697");
         let asButtons2 = TemplateBuilder.buildButtonTemplate("Choose store", 6, 1, false, "reply", "Choose store");
@@ -57,7 +57,7 @@ module.exports = class Composer {
     static composeLearnMoreElements() {
         let learnMoreMsgElement = TemplateBuilder.buildTextMessage('Sure! 👍 What would you like to learn more about?');
 
-        let promosEvents = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Main%20KV.jpg", 6, 5, true, "none", "Promos and Events", "Select", 6, 1, true, "open-url", "https://toysrus.com.ph/promos");
+        let promosEvents = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Summer-Catalog-chatbot.jpg", 6, 5, true, "none", "Promos and Events", "Select", 6, 1, true, "open-url", "https://toysrus.com.ph/promos");
         let howShopPlay = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/CSP-HowItWorks%20(1019).jpg", 6, 5, true, "none","How to Call Shop Play?", "Select", 6, 1, true, "open-url", "https://toysrus.com.ph/callshopplay");
         let returnExchange = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Return-and-Exchange%20(1019).jpg", 6, 5, true, "none","Return and Exchange Policy", "Select", 6, 1, true, "open-url", "https://toysrus.com.ph/services");
         const cards = [promosEvents[0], promosEvents[1], promosEvents[2], howShopPlay[0], howShopPlay[1], howShopPlay[2], returnExchange[0], returnExchange[1], returnExchange[2]];
@@ -96,10 +96,9 @@ module.exports = class Composer {
 
 
     static composeErrorMsgElements() {
-        let errorText = "Woops, I didn’t quite get that 😅, I'm just a bot 🤖 and still learning. Do you want to chat 💬 with a personal shopper instead? Or maybe back to main menu 🗂️?";
+        let errorText = "Hey! 👋 Thanks for reaching out. Let us know if you want to talk to our personal shopper 🛍️ for more assistance, or you can give us a call at 0917111TOYS (09171118697). 📲";
         let errorTextElement = TemplateBuilder.buildTextTemplate(errorText, 6, 6);
-        let errorQuickReplies1 = TemplateBuilder.buildButtonTemplate("Talk to Shopper" ,3, 1, true, "open-url", "viber://chat?number=%2B639171118697");
-        let errorQuickReplies2 = TemplateBuilder.buildButtonTemplate("Main Menu", 3, 1, false, "reply", "Main Menu");
+        let errorQuickReplies1 = TemplateBuilder.buildButtonTemplate("Talk to Shopper" ,6, 1, true, "open-url", "viber://chat?number=%2B639171118697");
         
         const cards = [errorTextElement, errorQuickReplies1, errorQuickReplies2];
 
@@ -111,7 +110,7 @@ module.exports = class Composer {
     }
     
     static composeHandoffMsg(payload) {
-        let handoffMsg = TemplateBuilder.buildRichMediaMessage(Factory.getHandOffDialogue(payload));
+        let handoffMsg = Factory.getHandOffDialogue(payload);
 
         return handoffMsg;
     }
