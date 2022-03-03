@@ -36,7 +36,7 @@ module.exports = class Composer {
         let asImage = TemplateBuilder.buildImageTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/CALL%20SHOP%20PLAY%20x%20HOTLINE%20KV.jpg", 6, 4, true, "none");
         let asTitle = TemplateBuilder.buildTitleTemplate("Assisted Shopping");
         let asButtons1 = TemplateBuilder.buildButtonTemplate("Call 0917111TOYS", 6, 1, true, "open-url", "viber://chat?number=%2B639171118697");
-        let asButtons2 = TemplateBuilder.buildButtonTemplate("Choose store", 6, 1, false, "reply", "Choose store");
+        let asButtons2 = TemplateBuilder.buildButtonTemplate("Choose store", 6, 1, false, "reply", "Choose Preferred Stores");
 
         let rob = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/GoR-shop-online-button_1%20(1005).jpg", 6, 5, true, "none", "GoRobinsons", "Shop at GoRobinsons", 6, 1, true, "open-url", "https://toysrus.gorobinsons.ph");
         
