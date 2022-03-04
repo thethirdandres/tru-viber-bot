@@ -38,9 +38,9 @@ module.exports = class Composer {
         let asButtons1 = TemplateBuilder.buildButtonTemplate("Call 0917111TOYS", 6, 1, true, "open-url", "viber://chat?number=%2B639171118697");
         let asButtons2 = TemplateBuilder.buildButtonTemplate("Choose store", 6, 1, false, "reply", "Choose Preferred Stores");
 
-        let rob = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/GoR-shop-online-button_1%20(1005).jpg", 6, 5, true, "none", "GoRobinsons", "Shop at GoRobinsons", 6, 1, true, "open-url", "https://toysrus.gorobinsons.ph");
+        let rob = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/2-buttons-try.jpg", 6, 5, true, "none", "GoRobinsons", "Shop at GoRobinsons", 6, 1, true, "open-url", "https://toysrus.gorobinsons.ph");
         
-        let slImage = TemplateBuilder.buildImageTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/laz-shopee_3%20(1005).jpg", 6, 4, true, "none");
+        let slImage = TemplateBuilder.buildImageTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/3-buttons-try.jpg", 6, 4, true, "none");
         let slTitle = TemplateBuilder.buildTitleTemplate("Shop at our online stores");
         let slButtons1 = TemplateBuilder.buildButtonTemplate("Lazada", 6, 1, true, "open-url", "https://www.lazada.com.ph/shop/toys-r-us");
         let slButtons2 = TemplateBuilder.buildButtonTemplate("Shopee", 6, 1, true, "open-url", "https://shopee.ph/toysrusph");
