@@ -33,7 +33,7 @@ module.exports = class Composer {
     static composeMainMenuElements() {
         let mainMenuMsgElement = TemplateBuilder.buildTextMessage('How can we help you today?');
         
-        let asImage = TemplateBuilder.buildImageTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/others/csp-hotline.jpg", 6, 4, true, "none");
+        let asImage = TemplateBuilder.buildImageTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/others/Screenshot%202022-03-05%20113345.png", 6, 4, true, "none");
         let asTitle = TemplateBuilder.buildTitleTemplate("Assisted Shopping");
         let asButtons1 = TemplateBuilder.buildButtonTemplate("Call 0917111TOYS", 6, 1, true, "open-url", "viber://chat?number=%2B639171118697");
         let asButtons2 = TemplateBuilder.buildButtonTemplate("Choose Preferred Stores", 6, 1, false, "reply", "Choose store");
