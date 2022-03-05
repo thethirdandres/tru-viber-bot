@@ -42,7 +42,7 @@ module.exports = class Composer {
         let laz = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/LazMall.jpg", 6, 5, true, "none", "Lazada", "Shop at Lazada", 6, 1, true, "open-url", "https://www.lazada.com.ph/shop/toys-r-us");
         let sho = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/ShopeeMall.jpg", 6, 5, true, "none", "Shopee", "Shop at Shopee", 6, 1, true, "open-url", "https://shopee.ph/toysrusph");
         
-        const cards = [asImage, asTitle, asButtons1, asButtons2, rob[0], rob[1], rob[2], laz[0], laz[1], laz[2], sho[0], sho[1], sho[2]];
+        const cards = [asImage, asButtons1, asButtons2, rob[0], rob[1], rob[2], laz[0], laz[1], laz[2], sho[0], sho[1], sho[2]];
 
 
         let mainMenuElementBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);
