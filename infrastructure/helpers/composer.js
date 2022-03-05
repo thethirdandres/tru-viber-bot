@@ -100,7 +100,7 @@ module.exports = class Composer {
         let errorTextElement = TemplateBuilder.buildTextTemplate(errorText, 6, 6);
         let errorQuickReplies1 = TemplateBuilder.buildButtonTemplate("Talk to Shopper" ,6, 1, true, "open-url", "viber://chat?number=%2B639171118697");
         
-        const cards = [errorTextElement, errorQuickReplies1, errorQuickReplies2];
+        const cards = [errorTextElement, errorQuickReplies1];
 
         
         let errorMsgBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);
