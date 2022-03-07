@@ -21,7 +21,7 @@ require('dotenv').config();
 const bot = new ViberBot({
     authToken: process.env.VIBER_AUTHTOKEN,
     name: "Toys\"R\"Us Philippines",
-    avatar: `https://firebasestorage.googleapis.com/v0/b/rds-staging.appspot.com/o/tru-logo.jpg?alt=media&token=f686ba18-52d9-4bb3-ba1b-38bd16cfa0b0`
+    avatar: `https://storage.googleapis.com/avigate-img-resources/tru-resources/tru-logo.jpg`
 })
 
 // app should terminate if ff env variables are missing
