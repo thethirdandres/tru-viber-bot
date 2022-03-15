@@ -28,38 +28,41 @@ module.exports = class StoreData {
         return snapshot;
     }
 
-    static async setUserProfile(userID, userName) {
-        // returns false if userProfile is set - meaning it has no duplicates
-        const vc = db.collection('TRU-ViberCustomers').doc(userID);
-        await vc.get().then((doc) => {
-            if(!doc.exists) {
-                vc.set({
-                    name: userName
-                });
-
-                console.log('Added user profile with ID: ', userID);
-
-                return false;
-            } else {
-                return true;
-            }
-        })
-
-    }
 
     static async setUserDetails(userId) {
-        let document = db.collection("TRU-ViberCustomers").where('userId', '==', userId).get();
+        let document = db.collection("ViberCustomers").where('userId', '==', userId).get();
         if (document && document.exists) {
             await document.update({
-                last_message_entry: new Date().toISOString()
+                last_message_entry: new Date().toISOString(),
+                type: "TRU" //for old data to be overwritten with type field
             });
+            console.log('Added user profile with ID: ', userId)
         }
         else {
-            await db.collection("TRU-ViberCustomers").add({
+            await db.collection("ViberCustomers").doc(userId).set({
                 userId: userId,
-                last_message_entry: new Date().toISOString()
+                last_message_entry: new Date().toISOString(),
+                type: "TRU"
             });
         }
+
+        let customerMessagesDoc = db.collection("CustomerMessages").where('userId', '==', userId).get();
+        if (customerMessagesDoc && customerMessagesDoc.exists) {
+            await customerMessagesDoc.update({
+                last_message_entry: new Date().toISOString(),
+            });
+            console.log('Added to CustomerMessages with ID: ', userId)
+        }
+        else {
+            await db.collection("CustomerMessages").doc(userId).set({
+                viber_bot_token: "4ea6ae36e827e6ba-741fc9b77a92e333-4ec099c241654373",
+                is_messaged: false,
+                last_message_entry: new Date().toISOString(),
+                userId: userId,
+                type: "VIBER"
+            });
+        }
+        
         // const vc = db.collection('ViberCustomers').doc(userId).set({
         //     userId: userId,
         //     last_message_entry: admin.firestore.Timestamp.fromDate(new Date())
