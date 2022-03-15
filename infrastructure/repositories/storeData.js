@@ -28,36 +28,21 @@ module.exports = class StoreData {
         return snapshot;
     }
 
-    static async setUserProfile(userID, userName) {
-        // returns false if userProfile is set - meaning it has no duplicates
-        const vc = db.collection('TRU-ViberCustomers').doc(userID);
-        await vc.get().then((doc) => {
-            if(!doc.exists) {
-                vc.set({
-                    name: userName
-                });
-
-                console.log('Added user profile with ID: ', userID);
-
-                return false;
-            } else {
-                return true;
-            }
-        })
-
-    }
 
     static async setUserDetails(userId) {
-        let document = db.collection("TRU-ViberCustomers").where('userId', '==', userId).get();
+        let document = db.collection("ViberCustomers").where('userId', '==', userId).get();
         if (document && document.exists) {
             await document.update({
-                last_message_entry: new Date().toISOString()
+                last_message_entry: new Date().toISOString(),
+                type: "TRU" //for old data to be overwritten with type field
             });
+            console.log('Added user profile with ID: ', userId)
         }
         else {
-            await db.collection("TRU-ViberCustomers").add({
+            await db.collection("ViberCustomers").doc(userId).set({
                 userId: userId,
-                last_message_entry: new Date().toISOString()
+                last_message_entry: new Date().toISOString(),
+                type: "TRU"
             });
         }
         // const vc = db.collection('ViberCustomers').doc(userId).set({
