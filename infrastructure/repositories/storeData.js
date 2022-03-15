@@ -54,7 +54,7 @@ module.exports = class StoreData {
             console.log('Added to CustomerMessages with ID: ', userId)
         }
         else {
-            await db.collection("CustomerMessages").doc(userId).set({
+            await db.collection("CustomerMessages").doc(`${userId}`).set({
                 viber_bot_token: "4ea6ae36e827e6ba-741fc9b77a92e333-4ec099c241654373",
                 is_messaged: false,
                 last_message_entry: new Date().toISOString(),
