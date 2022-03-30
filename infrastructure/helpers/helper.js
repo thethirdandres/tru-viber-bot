@@ -3,6 +3,7 @@
 
 const CarouselComposer = require('./carouselComposer');
 const StoreData = require('../repositories/storeData');
+const https = require('https');
 
 module.exports = class Helper {
         
