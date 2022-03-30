@@ -122,38 +122,6 @@ module.exports = class Composer {
         return handoffMsg;
     }
 
-// ========================================================================
-
-
-
-
-
-
-
-
-
-
-    
-    
-    
-
-    
-
-    static composeShopOnlineElements() {
-        let goRob = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/general/GoRobinsons%20Chatbot.jpg", 6, 5, true, "none", "GoRobinsons", "Shop at GoRobinsons", 6, 1, true,  "open-url", "https://departmentstore.gorobinsons.ph/");
-        let sho = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/general/Shopee-chatbot.png", 6, 5, true, "none", "Shopee", "Shop at Shopee", 6, 1, true, "open-url", "https://shopee.ph/robinsons_department_store?utm_source=messenger&utm_medium=chatbot&utm_campaign=shopee");
-        let lazMall = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/general/img_shoponline.jpg", 6, 5, true, "none", "Lazada", "Shop at Lazada", 6, 1, true, "open-url", "https://www.lazada.com.ph/shop/robinsons-department-store");
-
-        const cards = [goRob[0], goRob[1], goRob[2], sho[0], sho[1], sho[2], lazMall[0], lazMall[1], lazMall[2],];
-
-
-        let shopOnlineBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);
-        let shopOnlineElement = TemplateBuilder.buildRichMediaMessage(shopOnlineBuild);
-
-        return shopOnlineElement;
-    }
-    
-
     
 
 }

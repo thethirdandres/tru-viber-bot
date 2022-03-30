@@ -66,15 +66,4 @@ module.exports = class Responder {
         return [handoffMsg];
     }
 
-
-
-    // ===================================================
-
-    static genShopOnlineElements() {
-        let shopOnlineElement = Composer.composeShopOnlineElements();
-
-        return [shopOnlineElement];
-    }
-
-
 }

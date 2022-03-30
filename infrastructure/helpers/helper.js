@@ -70,4 +70,13 @@ module.exports = class Helper {
             return word.charAt(0) + word.slice(1).toLowerCase();
         });
     }
+
+    static getReqUtm() {
+        https.get("https://tru.avigate.io/?utm_source=toysrus.com.ph&utm_medium=chat-button&utm_campaign=BR_engagement_chat&utm_content=fb-msg_eng_cmsgs", (res) => {
+            console.log("GET BUTTON CLICKED - UTM Tags captured");
+        }).on("error", (err) => {
+            console.log("Error: " + err.message);
+        });
+        
+    }
 }
