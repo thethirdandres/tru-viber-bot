@@ -16,6 +16,7 @@ module.exports = class Receiver {
         try {
             if(payload == "START" || payload == "GET STARTED") {
                 response = Responder.genGetStartedMsgElements();
+                Helper.getReqUtm();
             } else if(payload == "MAIN MENU") {
                 response = (Responder.genMainMenuElements());
             } else if(payload == "CHOOSE STORE" || payload == "LIST OF STORES") {
