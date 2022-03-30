@@ -34,12 +34,12 @@ module.exports = class StoreData {
         if (document && document.exists) {
             await document.update({
                 last_message_entry: new Date().toISOString(),
-                type: "TRU" //for old data to be overwritten with type field
+                type: "TRU" //for old data (without TYPE field) to be overwritten with type field
             });
             console.log('Added user profile with ID: ', userId)
         }
         else {
-            await db.collection("ViberCustomers").doc(userId).set({
+            await db.collection("ViberCustomers").add({
                 userId: userId,
                 last_message_entry: new Date().toISOString(),
                 type: "TRU"
