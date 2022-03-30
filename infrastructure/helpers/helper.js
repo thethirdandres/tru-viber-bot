@@ -1,7 +1,7 @@
 'use strict'
 
 
-const CarouselComposer = require('./carouselComposer');
+const TemplateBuilder = require('./templateBuilder');
 const StoreData = require('../repositories/storeData');
 const https = require('https');
 
@@ -58,12 +58,11 @@ module.exports = class Helper {
             
         });
 
-        // CHANGE THIS WITHOUT USING CAROUSELCOMPOSER
-        let stores = new CarouselComposer('#D3D3D3', row);
-        stores.addCarouselElement(result);
-        stores.addCarouselElement(result2);
+        const cards = [result, result2];
+        let storeListBuild = TemplateBuilder.buildJsonTemplate(6, row, cards);
+        let storeListElement = TemplateBuilder.buildRichMediaMessage(storeListBuild);
 
-        return stores.build();
+        return [storeListElement];
     }
 
     static lowerCaseAllWordsExceptFirstLetters(string) {

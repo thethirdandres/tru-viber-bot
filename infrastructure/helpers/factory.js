@@ -2,7 +2,6 @@
 
 const Helper = require('../helpers/helper');
 const TemplateBuilder = require('./templateBuilder');
-const CarouselComposer = require('./carouselComposer');
 
 module.exports = class Factory {
     static getHandOffDialogue(payload) {
