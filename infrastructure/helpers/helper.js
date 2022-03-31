@@ -59,7 +59,7 @@ module.exports = class Helper {
         });
 
         const cards = [result, result2];
-        let storeListBuild = TemplateBuilder.buildJsonTemplate(6, row, cards);
+        let storeListBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);
         let storeListElement = TemplateBuilder.buildRichMediaMessage(storeListBuild);
 
         return [storeListElement];
