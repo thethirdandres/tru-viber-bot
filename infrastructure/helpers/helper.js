@@ -58,7 +58,7 @@ module.exports = class Helper {
             
         });
 
-        const cards = [result, result2];
+        const cards = result2.length != 0 ? [result, result2] : [result];
         let storeListBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);
         let storeListElement = TemplateBuilder.buildRichMediaMessage(storeListBuild);
 
