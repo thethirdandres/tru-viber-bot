@@ -26,7 +26,6 @@ module.exports = class Helper {
         let snapshot = await StoreData.getStoresPerRegion(region);
         let row = Math.round(StoreData.maxStoreNum/2);
         let ctr = row;
-        row = row > 7 ? 7 : row;
         snapshot.forEach(async (doc) => {
             if(ctr > 14) {
                 result.push(
@@ -58,7 +57,9 @@ module.exports = class Helper {
         });
         
         const cards = result2.length != 0 ? result2.concat(result) : result2;
-        let storeListBuild = TemplateBuilder.buildJsonTemplate(6, Math.round(row/2), cards);
+        row = row > 14 ? Math.round(row/2) : row;
+
+        let storeListBuild = TemplateBuilder.buildJsonTemplate(6, row, cards);
         let storeListElement = TemplateBuilder.buildRichMediaMessage(storeListBuild);
 
         console.log('storeListBuild: ', storeListBuild)
