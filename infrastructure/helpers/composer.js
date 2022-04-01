@@ -34,25 +34,14 @@ module.exports = class Composer {
         let mainMenuMsgElement = TemplateBuilder.buildTextMessage('How can we help you today?');
         
         let asImage = TemplateBuilder.buildImageTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/others/Screenshot%202022-03-05%20113345.png", 6, 5, true, "none");
-        let asTitle = TemplateBuilder.buildTitleTemplate("Assisted Shopping");
         let asButtons1 = TemplateBuilder.buildButtonTemplate("Call 0917111TOYS", 6, 1, true, "open-url", "viber://chat?number=%2B639171118697");
         let asButtons2 = TemplateBuilder.buildButtonTemplate("CHOOSE PREFERRED STORE", 6, 1, false, "reply", "Choose store");
-
-        // let robImage = TemplateBuilder.buildImageTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/GoR.jpg", 6, 6, true, "none");
-        // let robButtons1 = TemplateBuilder.buildButtonTemplate("Shop at GoRobinsons", 6, 1, true, "open-url", "https://toysrus.gorobinsons.ph");
-
-        // let lazImage = TemplateBuilder.buildImageTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/LazMall.jpg", 6, 6, true, "none");
-        // let lazButtons1 = TemplateBuilder.buildButtonTemplate("Shop at Lazada", 6, 1, true, "open-url", "https://www.lazada.com.ph/shop/toys-r-us");
-
-        // let shoImage = TemplateBuilder.buildImageTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/ShopeeMall.jpg", 6, 6, true, "none");
-        // let shoButtons1 = TemplateBuilder.buildButtonTemplate("Shop at Shopee", 6, 1, true, "open-url", "https://shopee.ph/toysrusph");
 
         let rob = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/GoR.jpg", 6, 5, true, "none", "GoRobinsons", "SHOP AT GOROBINSONS", 6, 1, true, "open-url", "https://toysrus.gorobinsons.ph");
         let laz = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/LazMall.jpg", 6, 5, true, "none", "Lazada", "SHOP AT LAZADA", 6, 1, true, "open-url", "https://www.lazada.com.ph/shop/toys-r-us");
         let sho = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/ShopeeMall.jpg", 6, 5, true, "none", "Shopee", "SHOP AT SHOPEE", 6, 1, true, "open-url", "https://shopee.ph/toysrusph");
         
         const cards = [asImage, asButtons1, asButtons2, rob[0], rob[1], rob[2], laz[0], laz[1], laz[2], sho[0], sho[1], sho[2]];
-        // const cards = [asImage, asButtons1, asButtons2, robImage, robButtons1, lazImage, lazButtons1, shoImage, shoButtons1];
 
 
         let mainMenuElementBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);

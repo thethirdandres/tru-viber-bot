@@ -25,7 +25,6 @@ module.exports = class Responder {
 
         let welcomeMsgElement = getStartedMsgElements[0];
         let privacyPolicyElement = getStartedMsgElements[1];
-        // reuse genMainMenuElements()
         let mainMenuMsgElement = mainMenuElements[0];
         let mainMenuElement = mainMenuElements[1];
 
