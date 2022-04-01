@@ -39,7 +39,7 @@ bot.onConversationStarted( async (userProfile, isSubscribed, context, onFinish) 
     onFinish(Responder.genGetStartedButtonElements())
 });
 
-// all messages sent to the bbot are received here
+// all messages sent to the bot are received here
 bot.on(BotEvents.MESSAGE_RECEIVED, async (message, response) => {
     let delay = 0;
     console.log(response.userProfile);
