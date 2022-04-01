@@ -38,7 +38,6 @@ module.exports = class Helper {
                         'ActionBody': `STORE_CONTACT_NUMBER_CHATBOT_STORE_NAME ${doc.data().contact_number} ${doc.data().chatbot_store_name}`,
                         "Image": doc.data().button_img
                     }
-    
                 );
             } else {
                 result2.push(
@@ -58,7 +57,7 @@ module.exports = class Helper {
             
         });
 
-        const cards = result2.length != 0 ? [result, result2] : [result];
+        const cards = result2.length != 0 ? [result, result2] : result;
         let storeListBuild = TemplateBuilder.buildJsonTemplate(6, row, cards);
         let storeListElement = TemplateBuilder.buildRichMediaMessage(storeListBuild);
 
