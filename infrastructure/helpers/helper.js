@@ -57,7 +57,7 @@ module.exports = class Helper {
         });
         
         const cards = result2.length != 0 ? result2.concat(result) : result2;
-        row = row > 14 ? Math.round(row/2) : row;
+        row = row > 7 ? Math.round(row/2) : row;
 
         let storeListBuild = TemplateBuilder.buildJsonTemplate(6, row, cards);
         let storeListElement = TemplateBuilder.buildRichMediaMessage(storeListBuild);
