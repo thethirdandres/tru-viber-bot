@@ -97,7 +97,7 @@ module.exports = class Composer {
     static async composeStoreElement(payload) {
         let storeElement = await Helper.getStoreElement(payload);
 
-        return [storeElement];
+        return storeElement;
     }
 
 
