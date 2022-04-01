@@ -1,7 +1,7 @@
 'use strict'
 
 
-const CarouselComposer = require('./carouselComposer');
+const TemplateBuilder = require('./templateBuilder');
 const StoreData = require('../repositories/storeData');
 const https = require('https');
 
@@ -26,7 +26,6 @@ module.exports = class Helper {
         let snapshot = await StoreData.getStoresPerRegion(region);
         let row = Math.round(StoreData.maxStoreNum/2);
         let ctr = row;
-        row = row > 7 ? 7 : row;
         snapshot.forEach(async (doc) => {
             if(ctr > 14) {
                 result.push(
@@ -38,7 +37,6 @@ module.exports = class Helper {
                         'ActionBody': `STORE_CONTACT_NUMBER_CHATBOT_STORE_NAME ${doc.data().contact_number} ${doc.data().chatbot_store_name}`,
                         "Image": doc.data().button_img
                     }
-    
                 );
             } else {
                 result2.push(
@@ -57,13 +55,17 @@ module.exports = class Helper {
             ctr--;
             
         });
+        
+        const cards = result2.length != 0 ? result2.concat(result) : result2;
+        row = row > 7 ? Math.round(row/2) : row;
 
-        // CHANGE THIS WITHOUT USING CAROUSELCOMPOSER
-        let stores = new CarouselComposer('#D3D3D3', row);
-        stores.addCarouselElement(result);
-        stores.addCarouselElement(result2);
+        let storeListBuild = TemplateBuilder.buildJsonTemplate(6, row, cards);
+        let storeListElement = TemplateBuilder.buildRichMediaMessage(storeListBuild);
 
-        return stores.build();
+        console.log('storeListBuild: ', storeListBuild)
+        console.log('storeListElement: ', storeListElement)
+
+        return [storeListElement];
     }
 
     static lowerCaseAllWordsExceptFirstLetters(string) {
