@@ -35,7 +35,7 @@ module.exports = class Factory {
         ) {
             handoffText = TemplateBuilder.buildTextTemplate(`Hello! Thank you for reaching out to Robinsons Department Store.\nIn observance of the Holy Week, we are closed today, April 15 (Good Friday). We will resume regular operating hours on April 16, 2022 (Black Saturday).\nThank you and we look forward to serving you!`, 6, 6);
             handoffButton1 = TemplateBuilder.buildButtonTemplate("Confirm", 3, 1, true, "open-url", `viber://chat?number=%2B${contact_number}`);
-        } else if(chatbot_store_name == "Robinsons Antipolo" || //stores not closing 
+        } else if(chatbot_store_name == "Robinsons Place Antipolo" || //stores not closing 
             chatbot_store_name == "Robinsons Townville Cabanatuan" ||
             chatbot_store_name == "Robinsons Pampanga" ||
             chatbot_store_name == "Robinsons La Union" ||
