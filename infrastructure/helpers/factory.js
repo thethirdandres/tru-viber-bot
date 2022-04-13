@@ -16,8 +16,8 @@ module.exports = class Factory {
         let handoffButton1 = TemplateBuilder.buildButtonTemplate("Confirm", 3, 1, true, "open-url", `viber://chat?number=%2B${contact_number}`);
         let handoffButton2 = TemplateBuilder.buildButtonTemplate("Main Menu", 3, 1, false, "reply", `Main Menu`);
         
-        const localStoresNotClosedThuFri = ["Robinsons Antipolo", "Harbor Point, Subic", "Serin Tagaytay", "Solenad 3, Nuvali"];
-        const localStoresClosedFri = ["Robinsons Ilocos", "Robinsons Tuguegarao", "Robinsons Naga", "Robinsons Lipa", "U.P. Town Center"];
+        const localStoresNotClosedThuFri = ["Antipolo", "Harbor Point, Subic", "Serin Tagaytay", "Solenad 3, Nuvali"];
+        const localStoresClosedFri = ["Ilocos", "Tuguegarao", "Naga", "Lipa", "U.P. Town Center"];
           
         // For Holy Week 2022
         if(localStoresClosedFri.includes(chatbot_store_name)) {
