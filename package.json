@@ -1,7 +1,7 @@
 {
-  "name": "rds-viber-bot",
+  "name": "tru-viber-bot",
   "version": "0.1.0",
-  "description": "chatbot for Robinsons Department Store",
+  "description": "chatbot for Toys\"R\"Us ",
   "main": "index.js",
   "scripts": {
     "start": "node index"
