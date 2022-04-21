@@ -17,6 +17,7 @@ module.exports = class StoreData {
     static async getStoresPerRegion(region) {
         const rds_snapshot = await db.collection("TemporaryTenant").where("parent", "==", "108870114890548").where("region", "==", region).orderBy("order").get();
         const ent_snapshot = await db.collection("Tenant").where("parent_id", "==", "NnqVd51ZSWDpk6qVHJNt").where("is_chatbot_active", "==", true).where("region", "==", region).orderBy("order").get();
+        console.log(ent_snapshot);
         if(ent_snapshot.empty && rds_snapshot.empty) {
             console.log('No matching documents.');
             return;
