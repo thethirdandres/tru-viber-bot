@@ -91,7 +91,8 @@ module.exports = class StoreData {
             ctr--;
             
         });
-
+    }
+    
     static async updateCurrentSession(user, payload) {
         let document = await db.collection("Customers").where('userId', '==', user.id).get();
         
