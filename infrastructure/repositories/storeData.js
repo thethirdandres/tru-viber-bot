@@ -55,6 +55,43 @@ module.exports = class StoreData {
         }  
     }
 
+    static async getStoreElement(region) {
+        console.log("Passed region:", region);
+        let result = [];
+        let result2 = [];
+        let snapshot = await StoreData.getStoresPerRegion(region);
+        let row = Math.round(StoreData.maxStoreNum/2);
+        let ctr = row;
+        snapshot.forEach(async (doc) => {
+            if(ctr > 14) {
+                result.push(
+                    {
+                        'Columns': 3,
+                        'Rows': 1,
+                        'Silent': true,
+                        'ActionType': 'reply',
+                        'ActionBody': `STORE_CONTACT_NUMBER_CHATBOT_STORE_NAME ${doc.data().contact_number} ${doc.data().parent} ${doc.data().chatbot_store_name}`,
+                        "Image": doc.data().button_img
+                    }
+                );
+            } else {
+                result2.push(
+                    {
+                        'Columns': 3,
+                        'Rows': 1,
+                        'Silent': true,
+                        'ActionType': 'reply',
+                        'ActionBody': `STORE_CONTACT_NUMBER_CHATBOT_STORE_NAME ${doc.data().contact_number} ${doc.data().parent} ${doc.data().chatbot_store_name}`,
+                        "Image": doc.data().button_img
+                    }
+    
+                );
+            }
+
+            ctr--;
+            
+        });
+
     static async updateCurrentSession(user, payload) {
         let document = await db.collection("Customers").where('userId', '==', user.id).get();
         

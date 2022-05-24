@@ -2,7 +2,7 @@
 
 const TemplateBuilder = require('./templateBuilder');
 const Factory = require('./factory');
-const Helper = require('./helper');
+const StoreData = require('../repositories/storeData');
 
 
 module.exports = class Composer {
@@ -84,7 +84,7 @@ module.exports = class Composer {
     }
 
     static async composeStoreElement(payload) {
-        let storeElement = await Helper.getStoreElement(payload);
+        let storeElement = await StoreData.getStoreElement(payload);
 
         return storeElement;
     }
