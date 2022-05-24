@@ -65,7 +65,7 @@ module.exports = class Responder {
         return [handoffMsg];
     }
 
-    static genHandoffSequence(user, payload) {
+    static async genHandoffSequence(user, payload) {
         await StoreData.updateCurrentSession(user, payload);
     }
 
