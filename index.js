@@ -43,8 +43,7 @@ bot.onConversationStarted( async (userProfile, isSubscribed, context, onFinish) 
 bot.on(BotEvents.MESSAGE_RECEIVED, async (message, response) => {
     let delay = 0;
     console.log(response.userProfile);
-    console.log(message);
-    await Store.setUserDetails(response.userProfile, message)
+    await Store.setUserDetails(response.userProfile, message.text)
     let res = await Receiver.handleMessage(message);
     
     try {
