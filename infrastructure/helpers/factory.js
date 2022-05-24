@@ -8,7 +8,7 @@ module.exports = class Factory {
         let payload_tokens = payload.split(" ");
         let contact_number = payload_tokens[1];
         let parent_id = payload_tokens[2];
-        let chatbot_store_name_raw = payload_tokens.splice(3).join(" ");
+        let chatbot_store_name_raw = payload_tokens.splice(4).join(" ");
         let chatbot_store_name = Helper.lowerCaseAllWordsExceptFirstLetters(chatbot_store_name_raw);
         let chatbot_store_name_full = "Toys\"R\"Us ".concat(chatbot_store_name);
         

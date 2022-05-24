@@ -117,11 +117,13 @@ module.exports = class StoreData {
 
         let store = await db.collection("TemporaryTenant").where("parent", "==", parent_id).where("business_name", "==", chatbot_store_name).get();
 
-        console.log("document", document);
-        console.log("store", store);
+        console.log("document", document.docs);
+        console.log("store", store.docs);
+        console.log(document.exists);
+        console.log(store.exists);
         if (document && store && document.exists && store.exists) {
             await document.update({
-                currentSession: document[0].data().doc_id
+                currentSession: store[0].data().doc_id
             });
             console.log('Entered session with personal shopper with userId: ', user.id);
         } else {
