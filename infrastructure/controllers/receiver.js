@@ -5,7 +5,7 @@ const Helper = require('../helpers/helper');
 
 
 module.exports = class Receiver {
-    static async handleMessage(message) {
+    static async handleMessage(user, message) {
         let response = [];
         let payload = message.text.toUpperCase();
         console.log("Postback Message:", payload);
@@ -29,6 +29,8 @@ module.exports = class Receiver {
                 response = (Responder.genLearnMoreElements());
             } else if(payload.startsWith("STORE_CONTACT_NUMBER")) {
                 response = (Responder.genHandoffMsg(payload));
+            } else if(payload.startsWith("HANDOFF")) {
+                response = Responder.genHandoffSequence(user, payload);
             } else {
                 response = (Responder.genErrorMsgElements());
             }

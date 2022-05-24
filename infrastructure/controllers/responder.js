@@ -2,6 +2,7 @@
 
 const TemplateBuilder = require('../helpers/templateBuilder');
 const Composer = require('../helpers/composer');
+const StoreData = require('../repositories/storeData');
 
 module.exports = class Responder {
     static genKeyboardElements() {
@@ -63,6 +64,10 @@ module.exports = class Responder {
         let handoffMsg = Composer.composeHandoffMsg(payload);
 
         return [handoffMsg];
+    }
+
+    static genHandoffSequence() {
+        StoreData.updateCurrentSession
     }
 
 }

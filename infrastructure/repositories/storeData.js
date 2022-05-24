@@ -52,4 +52,23 @@ module.exports = class StoreData {
             });
         }  
     }
+
+    static async genHandoffSequence(user, payload) {
+        let document = await db.collection("Customers").where('userId', '==', user.id).get();
+        
+        let payload_tokens = payload.split(" ");
+        let contact_number = payload_tokens[1];
+        let parent_id = payload_tokens[2];
+        let chatbot_store_name_raw = payload_tokens.splice(4).join(" ");
+        let chatbot_store_name = Helper.lowerCaseAllWordsExceptFirstLetters(chatbot_store_name_raw);
+
+        let store = await db.collection("TemporaryTenant").where("parent", "==", parent_id).where("business_name", "==", chatbot_store_name).get();
+
+        if (document && store && document.exists && store.exists) {
+            await document.update({
+                currentSession: document[0].data().doc_id
+            });
+            console.log('Entered session with personal shopper with userId: ', user.id)
+        }
+    }
 }
