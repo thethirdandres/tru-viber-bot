@@ -34,7 +34,7 @@ module.exports = class Helper {
                         'Rows': 1,
                         'Silent': true,
                         'ActionType': 'reply',
-                        'ActionBody': `STORE_CONTACT_NUMBER_CHATBOT_STORE_NAME ${doc.data().contact_number} ${doc.data().chatbot_store_name} ${doc.data().parent}`,
+                        'ActionBody': `STORE_CONTACT_NUMBER_CHATBOT_STORE_NAME ${doc.data().contact_number} ${doc.data().parent} ${doc.data().chatbot_store_name}`,
                         "Image": doc.data().button_img
                     }
                 );
@@ -45,7 +45,7 @@ module.exports = class Helper {
                         'Rows': 1,
                         'Silent': true,
                         'ActionType': 'reply',
-                        'ActionBody': `STORE_CONTACT_NUMBER_CHATBOT_STORE_NAME ${doc.data().contact_number} ${doc.data().chatbot_store_name}`,
+                        'ActionBody': `STORE_CONTACT_NUMBER_CHATBOT_STORE_NAME ${doc.data().contact_number} ${doc.data().parent} ${doc.data().chatbot_store_name}`,
                         "Image": doc.data().button_img
                     }
     
