@@ -30,7 +30,7 @@ module.exports = class Receiver {
             } else if(payload.startsWith("STORE_CONTACT_NUMBER")) {
                 response = (Responder.genHandoffMsg(payload));
             } else if(payload.startsWith("HANDOFF")) {
-                response = Responder.genHandoffSequence(user, payload);
+                Responder.genHandoffSequence(user, payload);
             } else {
                 response = (Responder.genErrorMsgElements());
             }
