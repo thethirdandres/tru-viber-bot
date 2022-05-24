@@ -91,8 +91,19 @@ module.exports = class StoreData {
             ctr--;
             
         });
+        
+        const cards = result2.length != 0 ? result2.concat(result) : result2;
+        row = row > 7 ? Math.round(row/2) : row;
+
+        let storeListBuild = TemplateBuilder.buildJsonTemplate(6, row, cards);
+        let storeListElement = TemplateBuilder.buildRichMediaMessage(storeListBuild);
+
+        console.log('storeListBuild: ', storeListBuild)
+        console.log('storeListElement: ', storeListElement)
+
+        return [storeListElement];
     }
-    
+
     static async updateCurrentSession(user, payload) {
         let document = await db.collection("Customers").where('userId', '==', user.id).get();
         
