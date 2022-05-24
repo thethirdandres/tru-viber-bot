@@ -94,7 +94,7 @@ module.exports = class TemplateBuilder {
     static genKeyboardTemplate() {
         return {
             "Type": "keyboard",
-            // "InputFieldState": "hidden",
+            "InputFieldState": "hidden",
             "Buttons": [
                 {
                     "Columns": 2,
