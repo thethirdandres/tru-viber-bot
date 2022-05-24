@@ -44,7 +44,7 @@ bot.on(BotEvents.MESSAGE_RECEIVED, async (message, response) => {
     let delay = 0;
     console.log(response.userProfile);
     await Store.setUserDetails(response.userProfile, message.text)
-    let res = await Receiver.handleMessage(user, message);
+    let res = await Receiver.handleMessage(response.userProfile, message);
     
     try {
         console.log('Payload: ', res); 
