@@ -11,7 +11,7 @@ admin.initializeApp({
     )
 });
 
-let db = admin.firestore()
+let db = admin.firestore();
 
 module.exports = class StoreData {
     static maxStoreNum = 0;
@@ -70,7 +70,7 @@ module.exports = class StoreData {
             await document.update({
                 currentSession: document[0].data().doc_id
             });
-            console.log('Entered session with personal shopper with userId: ', user.id)
+            console.log('Entered session with personal shopper with userId: ', user.id);
         }
     }
 }

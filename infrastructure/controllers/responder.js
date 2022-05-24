@@ -1,6 +1,5 @@
 'use strict'
 
-const TemplateBuilder = require('../helpers/templateBuilder');
 const Composer = require('../helpers/composer');
 const StoreData = require('../repositories/storeData');
 
@@ -67,7 +66,7 @@ module.exports = class Responder {
     }
 
     static genHandoffSequence(user, payload) {
-        StoreData.updateCurrentSession(user, payload);
+        await StoreData.updateCurrentSession(user, payload);
     }
 
 }

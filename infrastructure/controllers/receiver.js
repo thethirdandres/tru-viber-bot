@@ -21,9 +21,7 @@ module.exports = class Receiver {
                 response = (Responder.genMainMenuElements());
             } else if(payload == "CHOOSE STORE" || payload == "LIST OF STORES") {
                 response = (Responder.genChooseStoreElements());
-            } else if(payload == "METRO MANILA" || 
-                        payload == "LUZON" || 
-                        payload == "VISMIN") {
+            } else if(payload == "METRO MANILA" || payload == "LUZON" || payload == "VISMIN") {
                 response = (await Responder.genStoreElements(payload));
             } else if(payload == "LEARN MORE") {
                 response = (Responder.genLearnMoreElements());
