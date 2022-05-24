@@ -47,7 +47,7 @@ bot.on(BotEvents.MESSAGE_RECEIVED, async (message, response) => {
     let res = await Receiver.handleMessage(response.userProfile, message);
     
     try {
-        console.log('Payload: ', res); 
+        console.log('Response: ', res); 
 
         res.forEach(async (element) => {
             sendMessage(element, response, delay*1500);
