@@ -29,20 +29,26 @@ module.exports = class StoreData {
     }
 
 
-    static async setUserDetails(userId) {
-        let document = db.collection("ViberCustomers").where('userId', '==', userId).get();
+    static async setUserDetails(user, message) {
+        let document = db.collection("Customers").where('userId', '==', user.id).get();
         if (document && document.exists) {
             await document.update({
-                last_message_entry: new Date().toISOString(),
-                type: "TRU" //for old data (without TYPE field) to be overwritten with type field
+                updateDate: new Date().toISOString(),
+                lastMessage: message,
+                lastMessageDate: new Date().toISOString(),
             });
-            console.log('Added user profile with ID: ', userId)
+            console.log('Added user profile with ID: ', user.id)
         }
         else {
-            await db.collection("ViberCustomers").add({
-                userId: userId,
-                last_message_entry: new Date().toISOString(),
-                type: "TRU"
+            await db.collection("Customers").doc(user.id).set({
+                userId: user.id,
+                state: "",
+                updateDate: new Date().toISOString(),
+                currentSession: "",
+                channel: "viber",
+                lastMessage: message,
+                lastMessageDate: new Date().toISOString(),
+                lastMessageFrom: user.name
             });
         }  
     }

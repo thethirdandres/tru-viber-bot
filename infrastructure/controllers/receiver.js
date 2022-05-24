@@ -8,7 +8,7 @@ module.exports = class Receiver {
     static async handleMessage(message) {
         let response = [];
         let payload = message.text.toUpperCase();
-        console.log("Message:", payload);
+        console.log("Postback Message:", payload);
         if(Helper.isValidHttpUrl(payload)) {
             return response; 
         }
