@@ -53,7 +53,7 @@ module.exports = class StoreData {
         }  
     }
 
-    static async genHandoffSequence(user, payload) {
+    static async updateCurrentSession(user, payload) {
         let document = await db.collection("Customers").where('userId', '==', user.id).get();
         
         let payload_tokens = payload.split(" ");
