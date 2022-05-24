@@ -40,7 +40,7 @@ module.exports = class StoreData {
             console.log('Added user profile with ID: ', user.id)
         }
         else {
-            await db.collection("Customers").doc(user.id).set({
+            await db.collection("Customers").doc(`${user.id}`).set({
                 userId: user.id,
                 state: "",
                 updateDate: new Date().toISOString(),
