@@ -124,7 +124,7 @@ module.exports = class StoreData {
         console.log(contact_number);
         console.log(parent_id);
         console.log(chatbot_store_name);
-        if (document && store && document.exists && store.exists) {
+        if (document && store && !document.empty && !store.empty) {
             await document.update({
                 currentSession: store[0].data().doc_id
             });
@@ -132,5 +132,7 @@ module.exports = class StoreData {
         } else {
             console.log("No session was changed.");
         }
+
+    
     }
 }
