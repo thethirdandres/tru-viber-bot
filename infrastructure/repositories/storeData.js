@@ -126,7 +126,7 @@ module.exports = class StoreData {
         console.log(chatbot_store_name);
         if (document && store && !document.exists && !store.exists) {
 
-            store.forEach(async (doc) => {
+            await store.forEach(async (doc) => {
                 await document.update({
                     currentSession: doc.data().doc_id
                 });
