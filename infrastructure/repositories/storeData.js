@@ -121,6 +121,9 @@ module.exports = class StoreData {
         console.log("store", store.docs);
         console.log(document.exists);
         console.log(store.exists);
+        console.log(contact_number);
+        console.log(parent_id);
+        console.log(chatbot_store_name);
         if (document && store && document.exists && store.exists) {
             await document.update({
                 currentSession: store[0].data().doc_id
