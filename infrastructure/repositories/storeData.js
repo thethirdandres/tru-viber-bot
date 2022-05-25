@@ -125,9 +125,12 @@ module.exports = class StoreData {
         console.log(parent_id);
         console.log(chatbot_store_name);
         if (document && store && !document.empty && !store.empty) {
-            await document.update({
-                currentSession: store[0].data().doc_id
-            });
+
+            store.forEach(async (doc) => {
+                await document.update({
+                    currentSession: doc.data().doc_id
+                });
+            })
             console.log('Entered session with personal shopper with userId: ', user.id);
         } else {
             console.log("No session was changed.");
