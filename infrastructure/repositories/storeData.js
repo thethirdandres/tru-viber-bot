@@ -107,7 +107,7 @@ module.exports = class StoreData {
     }
 
     static async updateCurrentSession(user, payload) {
-        let document = await db.collection("Customers").where('userId', '==', user.id).get();
+        let document = db.collection("Customers").where('userId', '==', user.id).get();
         
         let payload_tokens = payload.split(" ");
         let contact_number = payload_tokens[1];
@@ -115,7 +115,7 @@ module.exports = class StoreData {
         let chatbot_store_name_raw = payload_tokens.splice(4).join(" ");
         let chatbot_store_name = Helper.lowerCaseAllWordsExceptFirstLetters(chatbot_store_name_raw);
 
-        let store = await db.collection("TemporaryTenant").where("parent", "==", parent_id).where("business_name", "==", chatbot_store_name).get();
+        let store = db.collection("TemporaryTenant").where("parent", "==", parent_id).where("business_name", "==", chatbot_store_name).get();
 
         console.log("document", document.docs);
         console.log("store", store.docs);
@@ -124,7 +124,7 @@ module.exports = class StoreData {
         console.log(contact_number);
         console.log(parent_id);
         console.log(chatbot_store_name);
-        if (document && store && !document.empty && !store.empty) {
+        if (document && store && !document.exists && !store.exists) {
 
             store.forEach(async (doc) => {
                 await document.update({
