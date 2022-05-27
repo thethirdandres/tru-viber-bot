@@ -107,9 +107,6 @@ module.exports = class StoreData {
         let storeListBuild = TemplateBuilder.buildJsonTemplate(6, row, cards);
         let storeListElement = TemplateBuilder.buildRichMediaMessage(storeListBuild);
 
-        console.log('storeListBuild: ', storeListBuild)
-        console.log('storeListElement: ', storeListElement)
-
         return [storeListElement];
     }
 
@@ -300,7 +297,6 @@ module.exports = class StoreData {
             })
 
             db.collection('User').where('tenantId','==', docId).get().then(users=>{
-                console.log(users)
                 users.docs.forEach(async pgiUser=>{
                     let userData = pgiUser.data();
                     let displayName = user.name;
