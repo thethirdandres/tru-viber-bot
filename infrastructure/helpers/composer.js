@@ -110,6 +110,10 @@ module.exports = class Composer {
         return handoffMsg;
     }
 
-    
+    static composeConfirmHandoffMsg() {
+        let confirmHandoffMsg = Factory.genConfirmHandoffDialogue();
+
+        return confirmHandoffMsg;
+    }
 
 }
