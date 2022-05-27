@@ -2,6 +2,7 @@
 
 const Responder = require('./responder');
 const Helper = require('../helpers/helper');
+const StoreData = require('../repositories/storeData');
 
 
 module.exports = class Receiver {
