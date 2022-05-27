@@ -67,6 +67,10 @@ module.exports = class Responder {
 
     static async genHandoffSequence(user, payload) {
         await StoreData.updateCurrentSession(user, payload);
+
+        let confirmHandoffMsg = await Composer.composeConfirmHandoffMsg();
+
+        return [confirmHandoffMsg];
     }
 
 }

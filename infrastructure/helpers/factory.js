@@ -27,4 +27,11 @@ module.exports = class Factory {
         
         return handOffDialogueElement;
     }
+
+    static genConfirmHandoffDialogue() {
+        let textMsg = TemplateBuilder.buildTextMessage("Please wait a moment as we reconnect you to our personal shopper.");
+        
+        return textMsg;
+    
+    }
 }
