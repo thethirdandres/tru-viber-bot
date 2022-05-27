@@ -33,4 +33,20 @@ module.exports = class Helper {
         });
         
     }
+
+    static async getDateAsToken() {
+        var today = new Date();
+        var date = today.getFullYear()+ "" + (today.getMonth()+1) + "" + today.getDate();
+        var time = today.getHours() + "" + today.getMinutes() + "" + today.getSeconds();
+        var dateTime = date+time;
+
+        return dateTime;
+    }
+
+    static async genMessageJson(text) {
+        return {
+            text: text,
+            token: await this.getDateAsToken()
+        }
+    }
 }
