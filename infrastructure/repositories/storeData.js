@@ -257,7 +257,7 @@ module.exports = class StoreData {
         }
 
         try {
-            const customerRef = db.collection(`Tenant/${docId}/Customers`).doc(user.id);
+            const customerRef = db.collection(`TemporaryTenant/${docId}/Customers`).doc(user.id);
             customerRef.get().then((customerSnapshot)=>{
                 if(customerSnapshot.exists){
                     customerRef.update({
@@ -282,7 +282,7 @@ module.exports = class StoreData {
                 }
             })
 
-            const customerConvoRef = db.collection(`Tenant/${docId}/Customers/${user.id}/Conversations`).doc(mid);
+            const customerConvoRef = db.collection(`TemporaryTenant/${docId}/Customers/${user.id}/Conversations`).doc(mid);
             customerConvoRef.get().then((convoSnap)=>{
                 if(!convoSnap.exists){
                     customerConvoRef.set({
