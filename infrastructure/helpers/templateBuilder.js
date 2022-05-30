@@ -108,7 +108,7 @@ module.exports = class TemplateBuilder {
                     "Rows": 1,
                     "Silent": true,
                     "ActionType": "reply",
-                    "ActionBody": "Main Menu",
+                    "ActionBody": "POSTBACK|MAIN MENU",
                     "Image": "https://storage.googleapis.com/avigate-img-resources/keyboard_buttons/Menu.jpg",
                     "ImageScaleType": "fill"
                 },
@@ -117,7 +117,7 @@ module.exports = class TemplateBuilder {
                     "Rows": 1,
                     "Silent": true,
                     "ActionType": "reply",
-                    "ActionBody": "Learn More",
+                    "ActionBody": "POSTBACK|LEARN MORE",
                     "Image": "https://storage.googleapis.com/avigate-img-resources/keyboard_buttons/Learn.jpg",
                     "ImageScaleType": "fill"
                 },
