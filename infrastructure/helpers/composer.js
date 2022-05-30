@@ -116,4 +116,30 @@ module.exports = class Composer {
         return confirmHandoffMsg;
     }
 
+    static composeExitQuietModeMsg() {
+        let exitQuietModeMsg = TemplateBuilder.buildTextTemplate("Are you sure you want quit talking to our personal shopper?", 6, 6);
+        let exitConfirm = TemplateBuilder.buildButtonTemplate("Confirm", 3, 1, true, "reply", "POSTBACK|CONFIRM_EXIT");
+        let exitCancel = TemplateBuilder.buildButtonTemplate("Cancel", 3, 1, true, "reply", "POSTBACK|CANCEL_EXIT");
+
+        const cards = [exitQuietModeMsg, exitConfirm, exitCancel];
+        let handOffDialogueBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);
+        let handOffDialogueElement = TemplateBuilder.buildRichMediaMessage(handOffDialogueBuild);
+        
+
+        return handOffDialogueElement;
+    }
+
+    static composeConfirmExitQuietModeMsg() {
+        let msg = TemplateBuilder.buildTextMessage("You are now disconnected from our personal shopper. Please don't hesitate to contact again if you need assistance.");
+
+        return msg;
+    }
+
+    static composeCancelExitQuietModeMsg() {
+        let msg = TemplateBuilder.buildTextMessage("Alright, our personal shopper is still with you.");
+
+        return msg;
+    }
+
+
 }

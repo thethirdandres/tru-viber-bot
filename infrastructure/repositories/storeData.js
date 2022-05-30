@@ -3,7 +3,6 @@ require("dotenv").config();
 
 const TemplateBuilder = require('../helpers/templateBuilder');
 
-
 const admin = require("firebase-admin");
 
 admin.initializeApp({
@@ -198,6 +197,19 @@ module.exports = class StoreData {
 
                 let tenCustRef = db.collection(`TemporaryTenant/${tenantId}/Customers/${user.id}/Conversations`);
                 let tenCustDoc = await tenCustRef.get();
+                let attachments = {};
+                
+                let mime_type = message.size ? "video" : message.filename? "file" : message.stickerId ? "sticker" : " image";
+                attachments['data'] = [];
+                let image_data = {
+                    "image_data": {
+                        "preview_url": message.url,
+                        "url": message.url,
+                    },
+                    "mime_type": mime_type
+                }
+
+                attachments['data'].push(image_data);
  
                 if(!tenCustDoc.exists) {
                     if(message.text) {
@@ -209,17 +221,8 @@ module.exports = class StoreData {
                             message: message.text
                         })
                     } else if(message.url) {
-                        let mime_type = message.size ? "video" : message.filename? "file" : "image";
                         tenCustRef.doc(message.token).set({
-                            attachments: {
-                                data: [
-                                    {
-                                        url: message.url,
-                                        preview_url: message.url,
-                                        mime_type: mime_type
-                                    }
-                                ]
-                            },
+                            attachments: attachments,
                             date: admin.firestore.Timestamp.fromDate(new Date()),
                             docId: message.token,
                             from: from,
@@ -243,7 +246,8 @@ module.exports = class StoreData {
         if(message.text) {
             textMsg = message.text ? message.text : "";
         } else if (message.url) {
-            let type = message.size ? "video" : message.filename? "file" : "image";
+            let type = message.size ? "video" : message.filename? "file" : message.stickerId ? "sticker" : " image";
+
             attachments['data'] = [];
             let image_data = {
                 "image_data": {

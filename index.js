@@ -43,10 +43,16 @@ bot.onConversationStarted( async (userProfile, isSubscribed, context, onFinish) 
 bot.on(BotEvents.MESSAGE_RECEIVED, async (message, response) => {
     let delay = 0;
     console.log(response.userProfile);
-    await Store.setUserDetails(response.userProfile, message.text)
-
+    
     let messageText = message.text ? message.text : "";
-    await Store.setUserDetails(response.userProfile, messageText);
+    let isPostbackMessage = messageText == "" ? false : message.text.startsWith("POSTBACK");
+
+    if(message.text && message.text.split("POSTBACK|")[1] == "GET STARTED") {
+        messageText = "Get started";
+        await Store.setUserDetails(response.userProfile, messageText);
+    } else if(!isPostbackMessage) {
+        await Store.setUserDetails(response.userProfile, messageText);
+    }
 
     let res = await Receiver.handleMessage(response.userProfile, message);
     

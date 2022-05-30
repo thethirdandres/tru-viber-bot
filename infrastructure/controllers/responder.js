@@ -73,4 +73,21 @@ module.exports = class Responder {
         return [confirmHandoffMsg];
     }
 
+    static async genExitQuietModeMsg() {
+        let exitQuietModeMsg = await Composer.composeExitQuietModeMsg();
+
+        return [exitQuietModeMsg];
+    }
+
+    static async genConfirmExitQuietModeMsg() {
+        let confirmExitQuietModeMsg = await Composer.composeConfirmExitQuietModeMsg();
+
+        return [confirmExitQuietModeMsg];
+    }
+
+    static async genCancelExitQuietModeMsg() {
+        let msg = await Composer.composeCancelExitQuietModeMsg();
+
+        return [msg];
+    }
 }
