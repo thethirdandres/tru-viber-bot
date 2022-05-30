@@ -1,7 +1,6 @@
 'use strict'
 
 const TemplateBuilder = require('./templateBuilder');
-const Factory = require('./factory');
 const StoreData = require('../repositories/storeData');
 
 
@@ -111,9 +110,11 @@ module.exports = class Composer {
     }
 
     static composeConfirmHandoffMsg() {
-        let confirmHandoffMsg = Factory.genConfirmHandoffDialogue();
+        let confirmHandoffMsg1 = TemplateBuilder.buildTextMessage("Our personal shopper has been notified. Kindly wait for a moment as we connect you to them.");
+        let confirmHandoffMsg2 = TemplateBuilder.buildTextMessage("Welcome! I'm your personal shopper for today. How may I help you?");
 
-        return confirmHandoffMsg;
+
+        return [confirmHandoffMsg1, confirmHandoffMsg2];
     }
 
     static composeExitQuietModeMsg() {

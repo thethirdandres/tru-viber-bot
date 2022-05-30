@@ -45,14 +45,17 @@ module.exports = class StoreData {
                 });
             } else {
                 await customerRef.set({
-                    userId: user.id,
+                    docId: user.id,
                     state: "",
                     updateDate: admin.firestore.Timestamp.fromDate(new Date()),
                     currentSession: "",
                     channel: "viber",
                     lastMessage: message,
                     lastMessageDate: admin.firestore.Timestamp.fromDate(new Date()),
-                    lastMessageFrom: user.name
+                    lastMessageFrom: user.name.split(" ")[0],
+                    profilePicture: user.avatar,
+                    customerName: user.name,
+
                 });
             }
 
