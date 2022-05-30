@@ -11,7 +11,7 @@ module.exports = class Composer {
     }
 
     static composeGetStartedButtonElements() {
-        let getStartedButtonRaw = TemplateBuilder.buildButtonTemplate("Get started", 6, 1, false, "reply", "GET STARTED");
+        let getStartedButtonRaw = TemplateBuilder.buildButtonTemplate("Get started", 6, 1, false, "reply", "POSTBACK|GET STARTED");
         let getStartedButtonBuild = TemplateBuilder.buildJsonTemplate(6, 1, [getStartedButtonRaw]);
         let getStartedButtonElement = TemplateBuilder.buildRichMediaMessage(getStartedButtonBuild);
 
@@ -68,11 +68,11 @@ module.exports = class Composer {
     static composeChooseStoreElements() {
         let chooseStoreMsgElement = TemplateBuilder.buildTextMessage('Swipe ➡ through the options below 👇');
         
-        let metroManila = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/manila.jpg", 6, 5, true, "none", "Find stores in Metro Manila", "METRO MANILA", 6, 1, false, "reply", "METRO MANILA");
+        let metroManila = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/manila.jpg", 6, 5, true, "none", "Find stores in Metro Manila", "METRO MANILA", 6, 1, false, "reply", "POSTBACK|METRO MANILA");
         
-        let luzon = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/luzon.jpg", 6, 5, true, "none", "Find stores in Luzon", "LUZON", 6, 1, false, "reply", "LUZON");
+        let luzon = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/luzon.jpg", 6, 5, true, "none", "Find stores in Luzon", "LUZON", 6, 1, false, "reply", "POSTBACK|LUZON");
         
-        let visMin = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/visayas.jpg", 6, 5, true, "none", "Find stores in Visayas and Mindanao", "VISAYAS & MINDANAO", 6, 1, false, "reply", "VISMIN");
+        let visMin = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/visayas.jpg", 6, 5, true, "none", "Find stores in Visayas and Mindanao", "VISAYAS & MINDANAO", 6, 1, false, "reply", "POSTBACK|VISMIN");
         
         const cards = [metroManila[0], metroManila[1], metroManila[2], luzon[0], luzon[1], luzon[2], visMin[0], visMin[1], visMin[2]];
 
