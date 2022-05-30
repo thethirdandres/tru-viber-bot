@@ -81,7 +81,7 @@ module.exports = class StoreData {
                         'Rows': 1,
                         'Silent': true,
                         'ActionType': 'reply',
-                        'ActionBody': `STORE_CONTACT_NUMBER_CHATBOT_STORE_NAME ${doc.data().contact_number} ${doc.data().doc_id} ${doc.data().chatbot_store_name}`,
+                        'ActionBody': `POSTBACK|STORE_CONTACT_NUMBER_CHATBOT_STORE_NAME ${doc.data().contact_number} ${doc.data().doc_id} ${doc.data().chatbot_store_name}`,
                         "Image": doc.data().button_img
                     }
                 );
@@ -92,7 +92,7 @@ module.exports = class StoreData {
                         'Rows': 1,
                         'Silent': true,
                         'ActionType': 'reply',
-                        'ActionBody': `STORE_CONTACT_NUMBER_CHATBOT_STORE_NAME ${doc.data().contact_number} ${doc.data().doc_id} ${doc.data().chatbot_store_name}`,
+                        'ActionBody': `POSTBACK|STORE_CONTACT_NUMBER_CHATBOT_STORE_NAME ${doc.data().contact_number} ${doc.data().doc_id} ${doc.data().chatbot_store_name}`,
                         "Image": doc.data().button_img
                     }
     
