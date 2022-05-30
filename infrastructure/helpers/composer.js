@@ -1,6 +1,7 @@
 'use strict'
 
 const TemplateBuilder = require('./templateBuilder');
+const Factory = require("./factory");
 const StoreData = require('../repositories/storeData');
 
 
