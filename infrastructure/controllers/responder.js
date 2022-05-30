@@ -70,7 +70,7 @@ module.exports = class Responder {
 
         let confirmHandoffMsg = await Composer.composeConfirmHandoffMsg();
 
-        return [confirmHandoffMsg];
+        return confirmHandoffMsg;
     }
 
     static async genExitQuietModeMsg() {
