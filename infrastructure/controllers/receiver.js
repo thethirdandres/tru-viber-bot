@@ -53,14 +53,14 @@ module.exports = class Receiver {
             } else if(payload == "CANCEL_EXIT" && userState == "QUIET_MODE") {
                 response = await Responder.genCancelExitQuietModeMsg();
             } else {
-                StoreData.addCustomerMainPsid(user, message);    
                 if(userState == "") {
                     response = (Responder.genErrorMsgElements());
                 } else {
                     StoreData.saveQuietModeMsg(user, message, "user");
                 }
             }
-
+            
+            StoreData.addCustomerMainPsid(user, message);    
             StoreData.updateCustomerChatState(user.id, userState);
         } catch (error) {
             console.log(error);
