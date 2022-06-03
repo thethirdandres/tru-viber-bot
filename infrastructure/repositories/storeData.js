@@ -43,6 +43,7 @@ module.exports = class StoreData {
                     updateDate: admin.firestore.Timestamp.fromDate(new Date()),
                     lastMessage: messageTxt,
                     lastMessageDate: admin.firestore.Timestamp.fromDate(new Date()),
+                    docId: user.id
                 });
                 console.log('UPDATED user profile for : ', user.name)
 
