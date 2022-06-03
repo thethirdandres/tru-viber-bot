@@ -49,4 +49,18 @@ module.exports = class Helper {
             token: await this.getDateAsToken()
         }
     }
+
+    static async trimSlashUserId(viberId) {
+        let trimmedId = viberId.split("/");
+
+        if(trimmedId.length > 1) {
+            let newId = "";
+            trimmedId.forEach(token => {
+                newId += token;
+            })
+            return newId;
+        }
+
+        return viberId;
+    }
 }
