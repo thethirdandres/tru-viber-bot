@@ -32,17 +32,20 @@ module.exports = class StoreData {
     }
 
 
-    static async setUserDetails(user, message) {
+    static async setUserDetails(user, messageTxt) {
         try {
-            let customerRef = db.collection("Customers").doc(user.id);
+            let userId = await Helper.trimSlashUserId(user.id);
+            let customerRef = db.collection("Customers").doc(userId);
             let customerDoc = await customerRef.get();
 
             if(customerDoc.exists) {
                 await customerRef.update({
                     updateDate: admin.firestore.Timestamp.fromDate(new Date()),
-                    lastMessage: message,
+                    lastMessage: messageTxt,
                     lastMessageDate: admin.firestore.Timestamp.fromDate(new Date()),
                 });
+                console.log('UPDATED user profile for : ', user.name)
+
             } else {
                 await customerRef.set({
                     docId: user.id,
@@ -50,20 +53,20 @@ module.exports = class StoreData {
                     updateDate: admin.firestore.Timestamp.fromDate(new Date()),
                     currentSession: "",
                     channel: "viber",
-                    lastMessage: message,
+                    lastMessage: messageTxt,
                     lastMessageDate: admin.firestore.Timestamp.fromDate(new Date()),
                     lastMessageFrom: user.name.split(" ")[0],
                     profilePicture: user.avatar,
                     customerName: user.name,
 
                 });
+                console.log('CREATED user profile for : ', user.name)
+
             }
 
         } catch(error) {
             console.log(error);
         }
-
-        console.log('Updated user profile for : ', user.name)
     }
 
     static async getStoreElement(region) {
@@ -121,7 +124,8 @@ module.exports = class StoreData {
         // let chatbot_store_name = Helper.lowerCaseAllWordsExceptFirstLetters(chatbot_store_name_raw);
 
         try {
-            let customerRef = db.collection("Customers").doc(user.id)
+            let userId = await Helper.trimSlashUserId(user.id);
+            let customerRef = db.collection("Customers").doc(userId);
             let customerDoc = await customerRef.get();
 
             if(customerDoc.exists){
@@ -129,7 +133,7 @@ module.exports = class StoreData {
                     "currentSession": doc_id
                 })
 
-                let custRefOnTenant = db.collection(`Tenant/${doc_id}/Customers`).doc(user.id);
+                let custRefOnTenant = db.collection(`Tenant/${doc_id}/Customers`).doc(userId);
                 let custDocOnTenant = await custRefOnTenant.get();
 
                 if(!custDocOnTenant.exists){
@@ -193,26 +197,57 @@ module.exports = class StoreData {
 
     static async saveQuietModeMsg(user, message, from) {
         try {
-            let customerRef = await db.collection("Customers").doc(user.id).get();
+            let userId = await Helper.trimSlashUserId(user.id);
+            let customerRef = await db.collection("Customers").doc(userId).get();
+            let textMsg = "";
+            let type;
             
             if(customerRef.exists){
                 let tenantId = customerRef.data()['currentSession'];
 
-                let tenCustRef = db.collection(`TemporaryTenant/${tenantId}/Customers/${user.id}/Conversations`);
+                let tenCustRef = db.collection(`TemporaryTenant/${tenantId}/Customers/${userId}/Conversations`);
                 let tenCustDoc = await tenCustRef.get();
                 let attachments = {};
                 
-                let mime_type = message.size ? "video" : message.filename? "file" : message.stickerId ? "sticker" : " image";
-                attachments['data'] = [];
-                let image_data = {
-                    "image_data": {
-                        "preview_url": message.url,
-                        "url": message.url,
-                    },
-                    "mime_type": mime_type
+                if(message.text) {
+                    if(message.text.startsWith("POSTBACK|")) {
+                        if(message.text.startsWith("POSTBACK|HANDOFF")) {                    
+                            textMsg = "Received new customer inquiry";
+                        } else {
+                            textMsg = "";
+                        }
+                    } else {
+                        textMsg = message.text;
+                    }
+                } else if (message.url) {
+                    type = message.size ? "video" : message.filename? "file" : message.stickerId ? "sticker" : "image";
+                    attachments['data'] = [];
+                    if(type === "video") {
+                        let video_data = {
+                            "video_data": {
+                                "preview_url": message.thumbnail,
+                                "url": message.url,
+                            },
+                            "type": "video",
+                            "mime_type": "video"
+                        }
+            
+                        attachments['data'].push(video_data);
+                    } else {
+                        let image_data = {
+                            "image_data": {
+                                "preview_url": message.url,
+                                "url": message.url,
+                            },
+                            "type": type,
+                            "mime_type": type
+                        }
+            
+                        attachments['data'].push(image_data);
+                    }
+        
+                    textMsg = "";
                 }
-
-                attachments['data'].push(image_data);
  
                 if(!tenCustDoc.exists) {
                     if(message.text) {
@@ -221,7 +256,7 @@ module.exports = class StoreData {
                             date: admin.firestore.Timestamp.fromDate(new Date()),
                             docId: message.token,
                             from: from,
-                            message: message.text
+                            message: textMsg
                         })
                     } else if(message.url) {
                         tenCustRef.doc(message.token).set({
@@ -242,132 +277,171 @@ module.exports = class StoreData {
     }
 
     static async addCustomerMainPsid(user, message) {
-        let textMsg = "";
+        let textMsg = ""; //goes to notifs and Conversation documents
+        let lastMessage = ""; //goes to lastMessage field of Tenant/Customers
         let attachments = [];
         let mid = message.token;
-        let docId = await this.getCustomerCurrentSession(user.id);
-        if(message.text) {
-            textMsg = message.text ? message.text : "";
-        } else if (message.url) {
-            let type = message.size ? "video" : message.filename? "file" : message.stickerId ? "sticker" : " image";
+        let userId = await Helper.trimSlashUserId(user.id);
+        let docId = await this.getCustomerCurrentSession(userId);
+        let type;
 
+       if(message.text) {
+            if(message.text.startsWith("POSTBACK|")) {
+                if(message.text.startsWith("POSTBACK|HANDOFF")) {                    
+                    textMsg = "Received new customer inquiry";
+                    lastMessage = textMsg;
+                } else {
+                    textMsg = "";
+                    lastMessage = "Received button postback";
+                }
+            } else {
+                lastMessage = message.text;
+                textMsg = message.text;
+            }
+        } else if (message.url) {
+            type = message.size ? "video" : message.filename? "file" : message.stickerId ? "sticker" : "image";
             attachments['data'] = [];
-            let image_data = {
-                "image_data": {
-                    "preview_url": message.url,
-                    "url": message.url,
-                },
-                "type": type
+            if(type === "video") {
+                let video_data = {
+                    "video_data": {
+                        "preview_url": message.thumbnail,
+                        "url": message.url,
+                    },
+                    "type": "video",
+                    "mime_type": "video"
+                }
+    
+                attachments['data'].push(video_data);
+            } else {
+                let image_data = {
+                    "image_data": {
+                        "preview_url": message.url,
+                        "url": message.url,
+                    },
+                    "type": type,
+                    "mime_type": type
+                }
+    
+                attachments['data'].push(image_data);
             }
 
-            attachments['data'].push(image_data);
+            textMsg = "";
+            lastMessage = "Received " + type;
         }
 
-        try {
-            const customerRef = db.collection(`TemporaryTenant/${docId}/Customers`).doc(user.id);
-            customerRef.get().then((customerSnapshot)=>{
-                if(customerSnapshot.exists){
-                    customerRef.update({
-                        "channel": "viber",
-                        "customerName": user.name,
-                        "docId": user.id,
-                        "lastMessage": textMsg,
-                        "lastMessageFrom": user.name.split(" ")[0],
-                        "lastMessageDate": admin.firestore.Timestamp.fromDate(new Date()),
-                        "updateDate": admin.firestore.Timestamp.fromDate(new Date()),
-                    });
-                } else{
-                    customerRef.set({
-                        "channel": "viber",
-                        "customerName": user.name,
-                        "docId": user.id,
-                        "lastMessage": "",
-                        "lastMessageFrom": user.name.split(" ")[0],
-                        "lastMessageDate": admin.firestore.Timestamp.fromDate(new Date()),
-                        "updateDate": admin.firestore.Timestamp.fromDate(new Date()),
-                    });
-                }
-            })
+        console.log("docId in addCustomerMainPsid", docId);
+        console.log("typeof docId in addCustomerMainPsid", typeof docId);
 
-            const customerConvoRef = db.collection(`TemporaryTenant/${docId}/Customers/${user.id}/Conversations`).doc(mid);
-            customerConvoRef.get().then((convoSnap)=>{
-                if(!convoSnap.exists){
-                    customerConvoRef.set({
-                        "attachments": attachments,
-                        "date": admin.firestore.Timestamp.fromDate(new Date()),
-                        "docId": mid,
-                        "from": "user",
-                        "message": textMsg,
-                        "status": "unread"
-                    });
-                } 
-            })
+        if(docId !== "" || !docId || docId.length !== 0) {
+            try {
+                const customerRef = db.collection(`TemporaryTenant/${docId}/Customers`).doc(user.id);
+                customerRef.get().then((customerSnapshot)=>{
+                    if(customerSnapshot.exists){
+                        customerRef.update({
+                            "channel": "viber",
+                            "customerName": user.name,
+                            "docId": userId,
+                            "lastMessage": lastMessage,
+                            "lastMessageFrom": user.name.split(" ")[0],
+                            "lastMessageDate": admin.firestore.Timestamp.fromDate(new Date()),
+                            "updateDate": admin.firestore.Timestamp.fromDate(new Date()),
+                            "state": "", //set to currrentSession from root Customers
+                            "profilePicture": user.avatar
+                        })
+                    } else{
+                        customerRef.set({
+                            "channel": "viber",
+                            "customerName": user.name,
+                            "docId": userId,
+                            "lastMessage": lastMessage,
+                            "lastMessageFrom": user.name.split(" ")[0],
+                            "lastMessageDate": admin.firestore.Timestamp.fromDate(new Date()),
+                            "updateDate": admin.firestore.Timestamp.fromDate(new Date()),
+                            "state": "",
+                            "profilePicture": user.avatar
+                        });
+                    }
+                })
 
-            db.collection('User').where('tenantId','==', docId).get().then(users=>{
-                users.docs.forEach(async pgiUser=>{
-                    let userData = pgiUser.data();
-                    let displayName = user.name;
-                    
-                    let message;
-                    let bodyTxt = "";
-                    if(attachments.size > 0){
-                        bodyTxt = `${displayName} sent an attachment`;
-                        if(attachments['data'].type == "image"){
+                const customerConvoRef = db.collection(`TemporaryTenant/${docId}/Customers/${user.id}/Conversations`).doc(mid);
+                customerConvoRef.get().then((convoSnap)=>{
+                    if(!convoSnap.exists){
+                        customerConvoRef.set({
+                            "attachments": attachments,
+                            "date": admin.firestore.Timestamp.fromDate(new Date()),
+                            "docId": mid,
+                            "from": "user",
+                            "message": textMsg,
+                            "status": "unread"
+                        });
+                    } 
+                })
+
+                db.collection('User').where('tenantId','==', docId).get().then(users=>{
+                    users.docs.forEach(async pgiUser=>{
+                        let userData = pgiUser.data();
+                        let displayName = user.name;
+                        
+                        let message;
+                        let bodyTxt = "";
+                        if(attachments.length > 0){
+                            bodyTxt = `${displayName} sent an attachment`;
+                            if(attachments['data'].type == "image"){
+                                message = {
+                                    "notification": {
+                                        "title": `${displayName} ● Viber`,
+                                        "body": bodyTxt,
+                                        "imageUrl": attachments['data'].image_data.url
+                                    },
+                                    "token": userData['messagingToken']
+                                }
+                            } else{
+                                message = {
+                                    "notification": {
+                                        "title": `${displayName} ● Viber`,
+                                        "body": `${displayName} sent an attachment`
+                                    },
+                                    "token": userData['messagingToken']
+                                }
+                            }
+                        } else{
+                            bodyTxt = `${displayName} sent a message`
                             message = {
                                 "notification": {
                                     "title": `${displayName} ● Viber`,
-                                    "body": bodyTxt,
-                                    "imageUrl": attachments['data'].image_data.url
-                                },
-                                "token": userData['messagingToken']
-                            }
-                        } else{
-                            message = {
-                                "notification": {
-                                    "title": `${displayName} ● Messenger`,
-                                    "body": `${displayName} sent an attachment`
+                                    "body": textMsg
                                 },
                                 "token": userData['messagingToken']
                             }
                         }
-                    } else{
-                        bodyTxt = `${displayName} sent a message`
-                        message = {
-                            "notification": {
-                                "title": `${displayName} ● Viber`,
-                                "body": textMsg
-                            },
-                            "token": userData['messagingToken']
-                        }
-                    }
-                    console.log("MESSAGE DATA: ",message);
-                    this.sendPushNotification(message)
+                        console.log("MESSAGE DATA: ",message);
+                        this.sendPushNotification(message)
 
-                    const userNotifRef = db.collection(`User/${userData['docId']}/Notification`).doc();
-                    userNotifRef.get().then((userNotifSnap)=>{
-                        if(!userNotifSnap.exists){
-                            userNotifRef.set({
-                                "createDate": admin.firestore.Timestamp.fromDate(new Date()),
-                                "mid": mid,
-                                "tid": docId,
-                                "title": bodyTxt,
-                                "notificationStatus": "unread",
-                                "message": textMsg,
-                                "status": "unread",
-                                "cid": user.id
-                            });
-                        } 
+                        const userNotifRef = db.collection(`User/${userData['docId']}/Notification`).doc();
+                        userNotifRef.get().then((userNotifSnap)=>{
+                            if(!userNotifSnap.exists){
+                                userNotifRef.set({
+                                    "createDate": admin.firestore.Timestamp.fromDate(new Date()),
+                                    "mid": mid,
+                                    "tid": docId,
+                                    "title": bodyTxt,
+                                    "notificationStatus": "unread",
+                                    "message": textMsg,
+                                    "status": "unread",
+                                    "cid": userId
+                                });
+                            } 
+                        })
+
                     })
-
                 })
-            })
 
 
-        } catch (error) {
-            console.log(error);
-            return "ok";
+            } catch (error) {
+                console.log(error);
+                return "ok";
+            }
         }
-
         return "ok";
     }
 

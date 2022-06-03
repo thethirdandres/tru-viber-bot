@@ -18,7 +18,9 @@ module.exports = class Receiver {
             return response; 
         }
 
-        let userState = await StoreData.getCustomerChatState(user.id);
+        let userId = await Helper.trimSlashUserId(user.id);
+        console.log("userId in receiver", userId);
+        let userState = await StoreData.getCustomerChatState(userId);
 
         try {
             if(payload == "START" && userState == "" || payload == "GET STARTED" && userState == "") {
@@ -32,7 +34,7 @@ module.exports = class Receiver {
                 userState = "";;
             } else if((payload == "METRO MANILA" || payload == "LUZON" || payload == "VISMIN") && userState == "") {
                 response = (await Responder.genStoreElements(payload));
-                userState = "";;
+                userState = "";
             } else if(payload == "LEARN MORE" && userState == "") {
                 response = (Responder.genLearnMoreElements());
                 userState = "";
@@ -40,9 +42,9 @@ module.exports = class Receiver {
                 response = (Responder.genHandoffMsg(payload));
             } else if(payload.startsWith("HANDOFF") && userState == "") {
                 userState = "QUIET_MODE";
+                response = await Responder.genHandoffSequence(user, payload);
                 let firstMessage = await Helper.genMessageJson("Welcome! I'm your personal shopper for today. How may I help you?");
                 StoreData.saveQuietModeMsg(user, firstMessage, "us");
-                response = await Responder.genHandoffSequence(user, payload);
             } else if(payload.toUpperCase() == "EXIT" && userState == "QUIET_MODE") {
                 response = await Responder.genExitQuietModeMsg();
             } else if(payload == "CONFIRM_EXIT" && userState == "QUIET_MODE") {
@@ -56,12 +58,12 @@ module.exports = class Receiver {
                 if(userState == "") {
                     response = (Responder.genErrorMsgElements());
                 } else {
-                    StoreData.saveQuietModeMsg(user, message, "user");
+                    await StoreData.saveQuietModeMsg(user, message, "user");
                 }
             }
             
-            StoreData.addCustomerMainPsid(user, message);    
-            StoreData.updateCustomerChatState(user.id, userState);
+            StoreData.updateCustomerChatState(userId, userState);
+            await StoreData.addCustomerMainPsid(user, message);      
         } catch (error) {
             console.log(error);
         }
