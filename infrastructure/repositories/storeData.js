@@ -200,7 +200,7 @@ module.exports = class StoreData {
             if(customerRef.exists){
                 let tenantId = customerRef.data()['currentSession'];
 
-                let tenCustRef = db.collection(`TemporaryTenant/${tenantId}/Customers/${userId}/Conversations`);
+                let tenCustRef = db.collection(`Tenant/${tenantId}/Customers/${userId}/Conversations`);
                 let tenCustDoc = await tenCustRef.get();
                 let attachments = {};
                 
@@ -329,7 +329,7 @@ module.exports = class StoreData {
 
         if(docId !== "" || !docId || docId.length !== 0) {
             try {
-                const customerRef = db.collection(`TemporaryTenant/${docId}/Customers`).doc(user.id);
+                const customerRef = db.collection(`Tenant/${docId}/Customers`).doc(user.id);
                 customerRef.get().then((customerSnapshot)=>{
                     if(customerSnapshot.exists){
                         customerRef.update({
@@ -358,7 +358,7 @@ module.exports = class StoreData {
                     }
                 })
 
-                const customerConvoRef = db.collection(`TemporaryTenant/${docId}/Customers/${user.id}/Conversations`).doc(mid);
+                const customerConvoRef = db.collection(`Tenant/${docId}/Customers/${user.id}/Conversations`).doc(mid);
                 customerConvoRef.get().then((convoSnap)=>{
                     if(!convoSnap.exists){
                         customerConvoRef.set({
