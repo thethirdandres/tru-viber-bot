@@ -342,7 +342,7 @@ module.exports = class StoreData {
                         customerRef.update({
                             "channel": "viber",
                             "customerName": user.name,
-                            "docId": userId,
+                            "docId": user.id,
                             "lastMessage": lastMessage,
                             "lastMessageFrom": user.name.split(" ")[0],
                             "lastMessageDate": admin.firestore.Timestamp.fromDate(new Date()),
@@ -354,7 +354,7 @@ module.exports = class StoreData {
                         customerRef.set({
                             "channel": "viber",
                             "customerName": user.name,
-                            "docId": userId,
+                            "docId": user.id,
                             "lastMessage": lastMessage,
                             "lastMessageFrom": user.name.split(" ")[0],
                             "lastMessageDate": admin.firestore.Timestamp.fromDate(new Date()),
