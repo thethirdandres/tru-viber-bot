@@ -66,7 +66,14 @@ module.exports = class Responder {
     }
 
     static async genHandoffSequence(user, payload) {
-        await StoreData.updateCurrentSession(user, payload);
+        let payload_tokens = payload.split(" ");
+        // let contact_number = payload_tokens[1];
+        // let parent_id = payload_tokens[2];
+        let doc_id = payload_tokens[2];
+        // let chatbot_store_name_raw = payload_tokens.splice(4).join(" ");
+        // let chatbot_store_name = Helper.lowerCaseAllWordsExceptFirstLetters(chatbot_store_name_raw);
+
+        await StoreData.updateCurrentSession(user, doc_id);
 
         let confirmHandoffMsg = Composer.composeConfirmHandoffMsg();
 

@@ -19,7 +19,7 @@ module.exports = class StoreData {
 
     static async getStoresPerRegion(region) {
         const rds_snapshot = await db.collection("Tenant").where("parent", "==", "108870114890548").where("region", "==", region).orderBy("order").get();
-        // const ent_snapshot = await db.collection("Tenant").where("parent_id", "==", "NnqVd51ZSWDpk6qVHJNt").where("region", "==", region).orderBy("order").get();
+            // const ent_snapshot = await db.collection("Tenant").where("parent_id", "==", "NnqVd51ZSWDpk6qVHJNt").where("region", "==", region).orderBy("order").get();
         if(rds_snapshot.empty) {
             console.log('No matching documents.');
             return;
@@ -117,14 +117,7 @@ module.exports = class StoreData {
         return [storeListElement];
     }
 
-    static async updateCurrentSession(user, payload) {
-        let payload_tokens = payload.split(" ");
-        // let contact_number = payload_tokens[1];
-        // let parent_id = payload_tokens[2];
-        let doc_id = payload_tokens[2];
-        // let chatbot_store_name_raw = payload_tokens.splice(4).join(" ");
-        // let chatbot_store_name = Helper.lowerCaseAllWordsExceptFirstLetters(chatbot_store_name_raw);
-
+    static async updateCurrentSession(user, sessionId) {
         try {
             let userId = await Helper.trimSlashUserId(user.id);
             let customerRef = db.collection("Customers").doc(userId);
@@ -132,10 +125,10 @@ module.exports = class StoreData {
 
             if(customerDoc.exists){
                 customerRef.update({
-                    "currentSession": doc_id
+                    "currentSession": sessionId
                 })
 
-                let custRefOnTenant = db.collection(`Tenant/${doc_id}/Customers`).doc(userId);
+                let custRefOnTenant = db.collection(`Tenant/${sessionId}/Customers`).doc(userId);
                 let custDocOnTenant = await custRefOnTenant.get();
 
                 if(!custDocOnTenant.exists){

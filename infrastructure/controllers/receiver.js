@@ -49,6 +49,7 @@ module.exports = class Receiver {
                 response = await Responder.genExitQuietModeMsg();
             } else if(payload == "CONFIRM_EXIT" && userState == "QUIET_MODE") {
                 userState = "";
+                await StoreData.updateCurrentSession(user, "");
                 response = await Responder.genConfirmExitQuietModeMsg();
                 console.log(user.name, " is quitting QUIET_MODE");
                 console.log("userState in confirm_exit", userState);
