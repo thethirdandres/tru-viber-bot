@@ -43,11 +43,24 @@ bot.onConversationStarted( async (userProfile, isSubscribed, context, onFinish) 
 bot.on(BotEvents.MESSAGE_RECEIVED, async (message, response) => {
     let delay = 0;
     console.log(response.userProfile);
-    await Store.setUserDetails(response.userProfile.id)
-    let res = await Receiver.handleMessage(message);
+    console.log(message);
+    let messageText = message.text ? message.text : "";
+    let isPostbackMessage = messageText === "";
+
+    console.log("isPostbackMessage: ", isPostbackMessage);
+    if(message.text && message.text.split("POSTBACK|")[1] == "GET STARTED") {
+        console.log("someone pressed Get started");
+        messageText = "Get started";
+        await Store.setUserDetails(response.userProfile, messageText);
+    } else if(messageText !== "") {
+        console.log("someone did not press Get started and is not a postback");
+        await Store.setUserDetails(response.userProfile, messageText);
+    }
+    
+    let res = await Receiver.handleMessage(response.userProfile, message);
     
     try {
-        console.log('Payload: ', res); 
+        console.log('Response: ', res); 
 
         res.forEach(async (element) => {
             sendMessage(element, response, delay*1500);

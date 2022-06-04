@@ -1,8 +1,8 @@
 'use strict'
 
 const TemplateBuilder = require('./templateBuilder');
-const Factory = require('./factory');
-const Helper = require('./helper');
+const Factory = require("./factory");
+const StoreData = require('../repositories/storeData');
 
 
 module.exports = class Composer {
@@ -11,7 +11,7 @@ module.exports = class Composer {
     }
 
     static composeGetStartedButtonElements() {
-        let getStartedButtonRaw = TemplateBuilder.buildButtonTemplate("Get started", 6, 1, false, "reply", "Get started");
+        let getStartedButtonRaw = TemplateBuilder.buildButtonTemplate("Get started", 6, 1, false, "reply", "POSTBACK|GET STARTED");
         let getStartedButtonBuild = TemplateBuilder.buildJsonTemplate(6, 1, [getStartedButtonRaw]);
         let getStartedButtonElement = TemplateBuilder.buildRichMediaMessage(getStartedButtonBuild);
 
@@ -35,7 +35,7 @@ module.exports = class Composer {
         
         let asImage = TemplateBuilder.buildImageTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/others/Screenshot%202022-03-05%20113345.png", 6, 5, true, "none");
         let asButtons1 = TemplateBuilder.buildButtonTemplate("Call 0917111TOYS", 6, 1, true, "open-url", "viber://chat?number=%2B639171118697");
-        let asButtons2 = TemplateBuilder.buildButtonTemplate("CHOOSE PREFERRED STORE", 6, 1, false, "reply", "Choose store");
+        let asButtons2 = TemplateBuilder.buildButtonTemplate("CHOOSE PREFERRED STORE", 6, 1, false, "reply", "POSTBACK|CHOOSE STORE");
 
         let rob = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/GoR.jpg", 6, 5, true, "none", "GoRobinsons", "SHOP AT GOROBINSONS", 6, 1, true, "open-url", "https://toysrus.gorobinsons.ph");
         let laz = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/LazMall.jpg", 6, 5, true, "none", "Lazada", "SHOP AT LAZADA", 6, 1, true, "open-url", "https://www.lazada.com.ph/shop/toys-r-us");
@@ -68,11 +68,11 @@ module.exports = class Composer {
     static composeChooseStoreElements() {
         let chooseStoreMsgElement = TemplateBuilder.buildTextMessage('Swipe ➡ through the options below 👇');
         
-        let metroManila = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/manila.jpg", 6, 5, true, "none", "Find stores in Metro Manila", "METRO MANILA", 6, 1, false, "reply", "Metro Manila");
+        let metroManila = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/manila.jpg", 6, 5, true, "none", "Find stores in Metro Manila", "METRO MANILA", 6, 1, false, "reply", "POSTBACK|METRO MANILA");
         
-        let luzon = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/luzon.jpg", 6, 5, true, "none", "Find stores in Luzon", "LUZON", 6, 1, false, "reply", "Luzon");
+        let luzon = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/luzon.jpg", 6, 5, true, "none", "Find stores in Luzon", "LUZON", 6, 1, false, "reply", "POSTBACK|LUZON");
         
-        let visMin = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/visayas.jpg", 6, 5, true, "none", "Find stores in Visayas and Mindanao", "VISAYAS & MINDANAO", 6, 1, false, "reply", "VisMin");
+        let visMin = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/visayas.jpg", 6, 5, true, "none", "Find stores in Visayas and Mindanao", "VISAYAS & MINDANAO", 6, 1, false, "reply", "POSTBACK|VISMIN");
         
         const cards = [metroManila[0], metroManila[1], metroManila[2], luzon[0], luzon[1], luzon[2], visMin[0], visMin[1], visMin[2]];
 
@@ -84,7 +84,7 @@ module.exports = class Composer {
     }
 
     static async composeStoreElement(payload) {
-        let storeElement = await Helper.getStoreElement(payload);
+        let storeElement = await StoreData.getStoreElement(payload);
 
         return storeElement;
     }
@@ -110,6 +110,38 @@ module.exports = class Composer {
         return handoffMsg;
     }
 
-    
+    static composeConfirmHandoffMsg() {
+        let confirmHandoffMsg1 = TemplateBuilder.buildTextMessage("Our personal shopper has been notified. Kindly wait for a moment as we connect you to them.");
+        let confirmHandoffMsg2 = TemplateBuilder.buildTextMessage("Welcome! I'm your personal shopper for today. How may I help you?");
+
+
+        return [confirmHandoffMsg1, confirmHandoffMsg2];
+    }
+
+    static composeExitQuietModeMsg() {
+        let exitQuietModeMsg = TemplateBuilder.buildTextTemplate("Are you sure you want quit talking to our personal shopper?", 6, 6);
+        let exitConfirm = TemplateBuilder.buildButtonTemplate("Confirm", 3, 1, true, "reply", "POSTBACK|CONFIRM_EXIT");
+        let exitCancel = TemplateBuilder.buildButtonTemplate("Cancel", 3, 1, true, "reply", "POSTBACK|CANCEL_EXIT");
+
+        const cards = [exitQuietModeMsg, exitConfirm, exitCancel];
+        let handOffDialogueBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);
+        let handOffDialogueElement = TemplateBuilder.buildRichMediaMessage(handOffDialogueBuild);
+        
+
+        return handOffDialogueElement;
+    }
+
+    static composeConfirmExitQuietModeMsg() {
+        let msg = TemplateBuilder.buildTextMessage("You are now disconnected from our personal shopper. Please don't hesitate to contact again if you need assistance.");
+
+        return msg;
+    }
+
+    static composeCancelExitQuietModeMsg() {
+        let msg = TemplateBuilder.buildTextMessage("Alright, our personal shopper is still with you.");
+
+        return msg;
+    }
+
 
 }
