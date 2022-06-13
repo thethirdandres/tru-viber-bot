@@ -29,6 +29,55 @@ module.exports = class StoreData {
         return snapshot;
     }
 
+    static async getStoreElement(region) {
+        console.log("Passed region:", region);
+        let result = [];
+        let result2 = [];
+        let snapshot = await StoreData.getStoresPerRegion(region);
+        let row = Math.round(StoreData.maxStoreNum/2);
+        let ctr = row;
+        snapshot.forEach(async (doc) => {
+            if(ctr > 14) {
+                result.push(
+                    {
+                        'Columns': 3,
+                        'Rows': 1,
+                        'Silent': true,
+                        'ActionType': 'reply',
+                        'ActionBody': `STORE_CONTACT_NUMBER_CHATBOT_STORE_NAME ${doc.data().contact_number} ${doc.data().chatbot_store_name}`,
+                        "Image": doc.data().button_img
+                    }
+                );
+            } else {
+                result2.push(
+                    {
+                        'Columns': 3,
+                        'Rows': 1,
+                        'Silent': true,
+                        'ActionType': 'reply',
+                        'ActionBody': `STORE_CONTACT_NUMBER_CHATBOT_STORE_NAME ${doc.data().contact_number} ${doc.data().chatbot_store_name}`,
+                        "Image": doc.data().button_img
+                    }
+    
+                );
+            }
+
+            ctr--;
+            
+        });
+        
+        const cards = result2.length != 0 ? result2.concat(result) : result2;
+        row = row > 7 ? Math.round(row/2) : row;
+
+        let storeListBuild = TemplateBuilder.buildJsonTemplate(6, row, cards);
+        let storeListElement = TemplateBuilder.buildRichMediaMessage(storeListBuild);
+
+        console.log('storeListBuild: ', storeListBuild)
+        console.log('storeListElement: ', storeListElement)
+
+        return [storeListElement];
+    }
+
 
     static async setUserDetails(userId) {
         let document = db.collection("ViberCustomers").where('userId', '==', userId).get();
