@@ -2,6 +2,7 @@
 require("dotenv").config();
 
 const admin = require("firebase-admin");
+const TemplateBuilder = require("../helpers/templateBuilder");
 
 admin.initializeApp({
     credential: admin.credential.cert(
