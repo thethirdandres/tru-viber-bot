@@ -11,7 +11,7 @@ module.exports = class Composer {
     }
 
     static composeGetStartedButtonElements() {
-        let getStartedButtonRaw = TemplateBuilder.buildButtonTemplate("Get started", 6, 1, false, "reply", "POSTBACK|GET STARTED");
+        let getStartedButtonRaw = TemplateBuilder.buildButtonTemplate("Get started", 6, 1, false, "reply", "GET STARTED");
         let getStartedButtonBuild = TemplateBuilder.buildJsonTemplate(6, 1, [getStartedButtonRaw]);
         let getStartedButtonElement = TemplateBuilder.buildRichMediaMessage(getStartedButtonBuild);
 
@@ -35,7 +35,7 @@ module.exports = class Composer {
         
         let asImage = TemplateBuilder.buildImageTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/others/Screenshot%202022-03-05%20113345.png", 6, 5, true, "none");
         let asButtons1 = TemplateBuilder.buildButtonTemplate("Call 0917111TOYS", 6, 1, true, "open-url", "viber://chat?number=%2B639171118697");
-        let asButtons2 = TemplateBuilder.buildButtonTemplate("CHOOSE PREFERRED STORE", 6, 1, false, "reply", "POSTBACK|CHOOSE STORE");
+        let asButtons2 = TemplateBuilder.buildButtonTemplate("CHOOSE PREFERRED STORE", 6, 1, false, "reply", "CHOOSE STORE");
 
         let rob = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/chatbot-pix_viber-rev-GoCart.jpg", 6, 5, true, "none", "GoCart", "SHOP AT GOCART", 6, 1, true, "open-url", "https://toysrus.gocart.ph/");
         let laz = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/LazMall.jpg", 6, 5, true, "none", "Lazada", "SHOP AT LAZADA", 6, 1, true, "open-url", "https://www.lazada.com.ph/shop/toys-r-us");
@@ -69,11 +69,11 @@ module.exports = class Composer {
     static composeChooseStoreElements() {
         let chooseStoreMsgElement = TemplateBuilder.buildTextMessage('Swipe ➡ through the options below 👇');
         
-        let metroManila = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/manila.jpg", 6, 5, true, "none", "Find stores in Metro Manila", "METRO MANILA", 6, 1, false, "reply", "POSTBACK|METRO MANILA");
+        let metroManila = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/manila.jpg", 6, 5, true, "none", "Find stores in Metro Manila", "METRO MANILA", 6, 1, false, "reply", "METRO MANILA");
         
-        let luzon = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/luzon.jpg", 6, 5, true, "none", "Find stores in Luzon", "LUZON", 6, 1, false, "reply", "POSTBACK|LUZON");
+        let luzon = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/luzon.jpg", 6, 5, true, "none", "Find stores in Luzon", "LUZON", 6, 1, false, "reply", "LUZON");
         
-        let visMin = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/visayas.jpg", 6, 5, true, "none", "Find stores in Visayas and Mindanao", "VISAYAS & MINDANAO", 6, 1, false, "reply", "POSTBACK|VISMIN");
+        let visMin = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/visayas.jpg", 6, 5, true, "none", "Find stores in Visayas and Mindanao", "VISAYAS & MINDANAO", 6, 1, false, "reply", "VISMIN");
         
         const cards = [metroManila[0], metroManila[1], metroManila[2], luzon[0], luzon[1], luzon[2], visMin[0], visMin[1], visMin[2]];
 
@@ -121,8 +121,8 @@ module.exports = class Composer {
 
     static composeExitQuietModeMsg() {
         let exitQuietModeMsg = TemplateBuilder.buildTextTemplate("Are you sure you want quit talking to our personal shopper?", 6, 6);
-        let exitConfirm = TemplateBuilder.buildButtonTemplate("Confirm", 3, 1, true, "reply", "POSTBACK|CONFIRM_EXIT");
-        let exitCancel = TemplateBuilder.buildButtonTemplate("Cancel", 3, 1, true, "reply", "POSTBACK|CANCEL_EXIT");
+        let exitConfirm = TemplateBuilder.buildButtonTemplate("Confirm", 3, 1, true, "reply", "CONFIRM_EXIT");
+        let exitCancel = TemplateBuilder.buildButtonTemplate("Cancel", 3, 1, true, "reply", "CANCEL_EXIT");
 
         const cards = [exitQuietModeMsg, exitConfirm, exitCancel];
         let handOffDialogueBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);
