@@ -17,7 +17,7 @@ module.exports = class StoreData {
     static maxStoreNum = 0;
 
     static async getStoresPerRegion(region) {
-        const ent_snapshot = await db.collection("Tenant").where("parent_id", "==", "NnqVd51ZSWDpk6qVHJNt").where("region", "==", region).orderBy("order").get();
+        const ent_snapshot = await db.collection("Tenant").where("parent_id", "==", "NnqVd51ZSWDpk6qVHJNt").where("region", "==", region).where("viber_uri", "!=", "").get();
         if(ent_snapshot.empty) {
             console.log('No matching documents.');
             return;
