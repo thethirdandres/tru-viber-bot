@@ -23,9 +23,17 @@ module.exports = class Receiver {
         let userState = await StoreData.getCustomerChatState(userId);
 
         try {
-            if(payload == "START" && userState == "" || payload == "GET STARTED" && userState == "") {
+            if(payload == "START" || payload == "GET STARTED") {
+                if(userState == "") {
+                    Helper.getReqUtm();
+                } else if(userState == "QUIET_MODE") {
+                    console.log("ENTERED GET STARTED SEQUENCE");
+                    StoreData.updateCurrentSession(user, "");
+                    userState = "";
+                }
+                
                 response = Responder.genGetStartedMsgElements();
-                Helper.getReqUtm();
+                
             } else if(payload == "MAIN MENU" && userState == "") {
                 response = (Responder.genMainMenuElements());
                 userState = "";

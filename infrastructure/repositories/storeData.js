@@ -1,10 +1,9 @@
 'use strict'
 require("dotenv").config();
 
+const admin = require("firebase-admin");
 const TemplateBuilder = require('../helpers/templateBuilder');
 const Helper = require('../helpers/helper');
-
-const admin = require("firebase-admin");
 
 admin.initializeApp({
     credential: admin.credential.cert(
@@ -18,7 +17,7 @@ module.exports = class StoreData {
     static maxStoreNum = 0;
 
     static async getStoresPerRegion(region) {
-        const rds_snapshot = await db.collection("Tenant").where("parent", "==", "108870114890548").where("region", "==", region).orderBy("order").get();
+        const rds_snapshot = await db.collection("Tenant").where("parent", "==", "108870114890548").where("region", "==", region).orderBy("order").where("viber_uri", "!=", "").get();
             // const ent_snapshot = await db.collection("Tenant").where("parent_id", "==", "NnqVd51ZSWDpk6qVHJNt").where("region", "==", region).orderBy("order").get();
         if(rds_snapshot.empty) {
             console.log('No matching documents.');
@@ -33,11 +32,13 @@ module.exports = class StoreData {
     }
 
 
-    static async setUserDetails(user, messageTxt) {
+    static async setUserDetails(user, message) {
         try {
             let userId = await Helper.trimSlashUserId(user.id);
+            let messageTxt = message.text.startsWith("viber://pa?chatURI") ? "Handoff" : message.text.split("|")[2];
             let customerRef = db.collection("Customers").doc(userId);
             let customerDoc = await customerRef.get();
+            let userAvatar = user.avatar == null ? "" : user.avatar;
 
             if(customerDoc.exists) {
                 await customerRef.update({
@@ -58,7 +59,7 @@ module.exports = class StoreData {
                     lastMessage: messageTxt,
                     lastMessageDate: admin.firestore.Timestamp.fromDate(new Date()),
                     lastMessageFrom: user.name.split(" ")[0],
-                    profilePicture: user.avatar,
+                    profilePicture: userAvatar,
                     customerName: user.name,
 
                 });
@@ -85,8 +86,8 @@ module.exports = class StoreData {
                         'Columns': 3,
                         'Rows': 1,
                         'Silent': true,
-                        'ActionType': 'reply',
-                        'ActionBody': `POSTBACK|STORE_CONTACT_NUMBER_CHATBOT_STORE_NAME ${doc.data().contact_number} ${doc.data().doc_id} ${doc.data().chatbot_store_name}`,
+                        'ActionType': 'open-url',
+                        'ActionBody': `viber://pa?chatURI=${doc.data().viber_uri}&context=MAIN~${doc.data().viber_uri}`,
                         "Image": doc.data().button_img
                     }
                 );
@@ -96,8 +97,8 @@ module.exports = class StoreData {
                         'Columns': 3,
                         'Rows': 1,
                         'Silent': true,
-                        'ActionType': 'reply',
-                        'ActionBody': `POSTBACK|STORE_CONTACT_NUMBER_CHATBOT_STORE_NAME ${doc.data().contact_number} ${doc.data().doc_id} ${doc.data().chatbot_store_name}`,
+                        'ActionType': 'open-url',
+                        'ActionBody': `viber://pa?chatURI=${doc.data().viber_uri}&context=MAIN~${doc.data().viber_uri}`,
                         "Image": doc.data().button_img
                     }
     
@@ -128,11 +129,13 @@ module.exports = class StoreData {
                     "currentSession": sessionId
                 })
 
-                let custRefOnTenant = db.collection(`Tenant/${sessionId}/Customers`).doc(userId);
-                let custDocOnTenant = await custRefOnTenant.get();
-
-                if(!custDocOnTenant.exists){
-                    custRefOnTenant.set(customerDoc.data())
+                if(sessionId !== "") {
+                    let custRefOnTenant = db.collection(`Tenant/${sessionId}/Customers`).doc(userId);
+                    let custDocOnTenant = await custRefOnTenant.get();
+                    
+                    if(sessionId === "" || !custDocOnTenant.exists){
+                        custRefOnTenant.set(customerDoc.data())
+                    }
                 }
             }
 
@@ -279,6 +282,7 @@ module.exports = class StoreData {
         let userId = await Helper.trimSlashUserId(user.id);
         let docId = await this.getCustomerCurrentSession(userId);
         let type;
+        let userAvatar = user.avatar == null ? "" : user.avatar;
 
        if(message.text) {
             if(message.text.startsWith("POSTBACK|")) {
@@ -341,7 +345,7 @@ module.exports = class StoreData {
                             "lastMessageDate": admin.firestore.Timestamp.fromDate(new Date()),
                             "updateDate": admin.firestore.Timestamp.fromDate(new Date()),
                             "state": "", //set to currrentSession from root Customers
-                            "profilePicture": user.avatar
+                            "profilePicture": userAvatar
                         })
                     } else{
                         customerRef.set({
@@ -353,7 +357,7 @@ module.exports = class StoreData {
                             "lastMessageDate": admin.firestore.Timestamp.fromDate(new Date()),
                             "updateDate": admin.firestore.Timestamp.fromDate(new Date()),
                             "state": "",
-                            "profilePicture": user.avatar
+                            "profilePicture": userAvatar
                         });
                     }
                 })

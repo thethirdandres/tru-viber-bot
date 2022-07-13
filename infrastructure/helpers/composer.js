@@ -40,7 +40,7 @@ module.exports = class Composer {
         let rob = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/GoR.jpg", 6, 5, true, "none", "GoRobinsons", "SHOP AT GOROBINSONS", 6, 1, true, "open-url", "https://toysrus.gorobinsons.ph");
         let laz = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/LazMall.jpg", 6, 5, true, "none", "Lazada", "SHOP AT LAZADA", 6, 1, true, "open-url", "https://www.lazada.com.ph/shop/toys-r-us");
         let sho = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/ShopeeMall.jpg", 6, 5, true, "none", "Shopee", "SHOP AT SHOPEE", 6, 1, true, "open-url", "https://shopee.ph/toysrusph");
-        let met = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/general/chatbot-pix_viber-rev-Metromart.jpg", 6, 5, true, "none", "Metromart", "SHOP AT METROMART", 6, 1, true, "open-url", "placeholder.com");
+        let met = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/general/chatbot-pix_viber-rev-Metromart.jpg", 6, 5, true, "none", "Metromart", "SHOP AT METROMART", 6, 1, true, "open-url", "metromart.com");
         
         const cards = [asImage, asButtons1, asButtons2, rob[0], rob[1], rob[2], laz[0], laz[1], laz[2], sho[0], sho[1], sho[2], met[0], met[1], met[2]];
 
