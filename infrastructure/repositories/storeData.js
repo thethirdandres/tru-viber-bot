@@ -272,7 +272,7 @@ module.exports = class StoreData {
         } catch (error) {
             console.log(error);
         }
-    }
+    } 
 
     static async addCustomerMainPsid(user, message) {
         let textMsg = ""; //goes to notifs and Conversation documents
