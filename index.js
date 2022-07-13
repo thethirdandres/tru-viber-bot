@@ -10,6 +10,8 @@ const Responder = require('./infrastructure/controllers/responder');
 const express = require('express');
 const app = express(); // creates http server
 const { urlencoded } = require("body-parser");
+const Factory = require('./infrastructure/helpers/factory');
+const Helper = require('./infrastructure/helpers/helper');
 app.use(
     urlencoded({
       extended: true
@@ -36,7 +38,8 @@ if (!process.env.VIBER_EXPOSE_URL) {
 
 // triggered when user opens the for the first time via invite link or searching
 bot.onConversationStarted( async (userProfile, isSubscribed, context, onFinish) => {
-    onFinish(Responder.genGetStartedButtonElements())
+    onFinish(await Responder.genGetStartedButtonElements(userProfile));
+
 });
 
 // all messages sent to the bot are received here

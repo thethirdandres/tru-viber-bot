@@ -17,7 +17,7 @@ module.exports = class Factory {
         let handoffText = TemplateBuilder.buildTextTemplate(`You will be connected to ${chatbot_store_name_full}'s personal shopper, do you want to continue?`, 6, 6);
         // let handoffButton1 = TemplateBuilder.buildButtonTemplate("Confirm", 3, 1, true, "open-url", `viber://chat?number=%2B${contact_number}`);
         let handoffButton1 = TemplateBuilder.buildButtonTemplate("Confirm", 3, 1, true, "reply", `POSTBACK|HANDOFF_${payload}`);
-        let handoffButton2 = TemplateBuilder.buildButtonTemplate("Main Menu", 3, 1, false, "reply", `POSTBACK|MAIN MENU`);
+        let handoffButton2 = TemplateBuilder.buildButtonTemplate("Main Menu", 3, 1, false, "reply", `POSTBACK|MAIN MENU|Main Menu`);
 
         console.log("User being connected to personal shopper.");
       

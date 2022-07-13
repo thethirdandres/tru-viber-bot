@@ -15,7 +15,12 @@ module.exports = class Responder {
     }
 
     static genGetStartedButtonElements() {
+        console.log("ENTERED GET STARTED SEQUENCE");
+        StoreData.updateCurrentSession(user, "");
+        let userId = await Helper.trimSlashUserId(user.id);
+        StoreData.updateCustomerChatState(userId, "");
         let getStartedButtonElements = Composer.composeGetStartedButtonElements();
+        
         return getStartedButtonElements;
     }
 

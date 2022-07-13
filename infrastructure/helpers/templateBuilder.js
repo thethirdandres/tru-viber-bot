@@ -108,7 +108,7 @@ module.exports = class TemplateBuilder {
                     "Rows": 1,
                     "Silent": true,
                     "ActionType": "reply",
-                    "ActionBody": "POSTBACK|MAIN MENU",
+                    "ActionBody": "POSTBACK|MAIN MENU|Main Menu",
                     "Image": "https://storage.googleapis.com/avigate-img-resources/keyboard_buttons/Menu.jpg",
                     "ImageScaleType": "fill"
                 },
@@ -117,7 +117,7 @@ module.exports = class TemplateBuilder {
                     "Rows": 1,
                     "Silent": true,
                     "ActionType": "reply",
-                    "ActionBody": "POSTBACK|LEARN MORE",
+                    "ActionBody": "POSTBACK|LEARN MORE|Learn More",
                     "Image": "https://storage.googleapis.com/avigate-img-resources/keyboard_buttons/Learn.jpg",
                     "ImageScaleType": "fill"
                 },
@@ -165,7 +165,7 @@ module.exports = class TemplateBuilder {
             'TextHAlign': 'center',
             'TextVAlign': 'middle',
             'ActionType': 'reply',
-            'ActionBody': "POSTBACK|MAIN MENU",
+            'ActionBody': "POSTBACK|MAIN MENU|Main Menu",
             'BgColor': '#D3D3D3'
         }
         ];
