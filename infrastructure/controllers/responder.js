@@ -1,7 +1,8 @@
 'use strict'
 
-const TemplateBuilder = require('../helpers/templateBuilder');
 const Composer = require('../helpers/composer');
+const StoreData = require('../repositories/storeData');
+const Helper = require("../helpers/helper");
 
 module.exports = class Responder {
     static genKeyboardElements() {
@@ -14,8 +15,13 @@ module.exports = class Responder {
         return [errorMsgElements];
     }
 
-    static genGetStartedButtonElements() {
+    static async genGetStartedButtonElements(user) {
+        console.log("ENTERED GET STARTED SEQUENCE");
+        StoreData.updateCurrentSession(user, "");
+        let userId = await Helper.trimSlashUserId(user.id);
+        StoreData.updateCustomerChatState(userId, "");
         let getStartedButtonElements = Composer.composeGetStartedButtonElements();
+        
         return getStartedButtonElements;
     }
 
@@ -65,4 +71,36 @@ module.exports = class Responder {
         return [handoffMsg];
     }
 
+    static async genHandoffSequence(user, payload) {
+        let payload_tokens = payload.split(" ");
+        // let contact_number = payload_tokens[1];
+        // let parent_id = payload_tokens[2];
+        let doc_id = payload_tokens[2];
+        // let chatbot_store_name_raw = payload_tokens.splice(4).join(" ");
+        // let chatbot_store_name = Helper.lowerCaseAllWordsExceptFirstLetters(chatbot_store_name_raw);
+
+        await StoreData.updateCurrentSession(user, doc_id);
+
+        let confirmHandoffMsg = Composer.composeConfirmHandoffMsg();
+
+        return confirmHandoffMsg;
+    }
+
+    static async genExitQuietModeMsg() {
+        let exitQuietModeMsg = await Composer.composeExitQuietModeMsg();
+
+        return [exitQuietModeMsg];
+    }
+
+    static async genConfirmExitQuietModeMsg() {
+        let confirmExitQuietModeMsg = await Composer.composeConfirmExitQuietModeMsg();
+
+        return [confirmExitQuietModeMsg];
+    }
+
+    static async genCancelExitQuietModeMsg() {
+        let msg = await Composer.composeCancelExitQuietModeMsg();
+
+        return [msg];
+    }
 }

@@ -10,6 +10,8 @@ const Responder = require('./infrastructure/controllers/responder');
 const express = require('express');
 const app = express(); // creates http server
 const { urlencoded } = require("body-parser");
+const Factory = require('./infrastructure/helpers/factory');
+const Helper = require('./infrastructure/helpers/helper');
 app.use(
     urlencoded({
       extended: true
@@ -36,18 +38,28 @@ if (!process.env.VIBER_EXPOSE_URL) {
 
 // triggered when user opens the for the first time via invite link or searching
 bot.onConversationStarted( async (userProfile, isSubscribed, context, onFinish) => {
-    onFinish(Responder.genGetStartedButtonElements())
+    onFinish(await Responder.genGetStartedButtonElements(userProfile));
+
 });
 
 // all messages sent to the bot are received here
 bot.on(BotEvents.MESSAGE_RECEIVED, async (message, response) => {
     let delay = 0;
     console.log(response.userProfile);
-    await Store.setUserDetails(response.userProfile.id)
-    let res = await Receiver.handleMessage(message);
+    console.log(message);
+
+    if(message.text && message.text.split("POSTBACK|")[1] == "GET STARTED") {
+        console.log("someone pressed Get started");
+        await Store.setUserDetails(response.userProfile, message);
+    } else if(message.text) {
+        console.log("someone did not press Get started and is not a postback");
+        await Store.setUserDetails(response.userProfile, message);
+    }
+    
+    let res = await Receiver.handleMessage(response.userProfile, message);
     
     try {
-        console.log('Payload: ', res); 
+        console.log('Response: ', res); 
 
         res.forEach(async (element) => {
             sendMessage(element, response, delay*1500);

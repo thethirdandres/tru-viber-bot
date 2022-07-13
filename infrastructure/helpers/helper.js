@@ -1,8 +1,6 @@
 'use strict'
 
 
-const TemplateBuilder = require('./templateBuilder');
-const StoreData = require('../repositories/storeData');
 const https = require('https');
 
 module.exports = class Helper {
@@ -18,7 +16,6 @@ module.exports = class Helper {
     
         return url.protocol === "http:" || url.protocol === "https:" || url.protocol === "viber:";
     }
-   
 
     static lowerCaseAllWordsExceptFirstLetters(string) {
         return string.replace(/\S*/g, function (word) {
@@ -33,5 +30,35 @@ module.exports = class Helper {
             console.log("Error: " + err.message);
         });
         
+    }
+
+    static async getDateAsToken() {
+        var today = new Date();
+        var date = today.getFullYear()+ "" + (today.getMonth()+1) + "" + today.getDate();
+        var time = today.getHours() + "" + today.getMinutes() + "" + today.getSeconds();
+        var dateTime = date+time;
+
+        return dateTime;
+    }
+
+    static async genMessageJson(text) {
+        return {
+            text: text,
+            token: await this.getDateAsToken()
+        }
+    }
+
+    static async trimSlashUserId(viberId) {
+        let trimmedId = viberId.split("/");
+
+        if(trimmedId.length > 1) {
+            let newId = "";
+            trimmedId.forEach(token => {
+                newId += token;
+            })
+            return newId;
+        }
+
+        return viberId;
     }
 }
