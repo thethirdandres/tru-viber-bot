@@ -17,18 +17,17 @@ module.exports = class StoreData {
     static maxStoreNum = 0;
 
     static async getStoresPerRegion(region) {
-        const rds_snapshot = await db.collection("Tenant").where("parent", "==", "108870114890548").where("region", "==", region).where("viber_uri", "!=", "").get();
-            // const ent_snapshot = await db.collection("Tenant").where("parent_id", "==", "NnqVd51ZSWDpk6qVHJNt").where("region", "==", region).orderBy("order").get();
-        if(rds_snapshot.empty) {
+        const ent_snapshot = await db.collection("Tenant").where("parent_id", "==", "NnqVd51ZSWDpk6qVHJNt").where("region", "==", region).orderBy("order").get();
+        if(ent_snapshot.empty) {
             console.log('No matching documents.');
             return;
         }
 
-        // const snapshot = ent_snapshot.docs.concat(rds_snapshot.docs);
-        // this.maxStoreNum = ent_snapshot.size + rds_snapshot.size;
-        this.maxStoreNum = rds_snapshot.size;
+        // const snapshot = ent_snapshot.docs.concat(ent_snapshot.docs);
+        // this.maxStoreNum = ent_snapshot.size + ent_snapshot.size;
+        this.maxStoreNum = ent_snapshot.size;
         
-        return rds_snapshot;
+        return ent_snapshot;
     }
 
     static async getStoreElement(region) {
