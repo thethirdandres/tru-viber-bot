@@ -15,7 +15,7 @@ module.exports = class Responder {
         return [errorMsgElements];
     }
 
-    static async genGetStartedButtonElements() {
+    static async genGetStartedButtonElements(user) {
         console.log("ENTERED GET STARTED SEQUENCE");
         StoreData.updateCurrentSession(user, "");
         let userId = await Helper.trimSlashUserId(user.id);

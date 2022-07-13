@@ -39,7 +39,7 @@ module.exports = class StoreData {
             let customerRef = db.collection("Customers").doc(userId);
             let customerDoc = await customerRef.get();
             let userAvatar = user.avatar == null ? "" : user.avatar;
-
+            
             if(customerDoc.exists) {
                 await customerRef.update({
                     updateDate: admin.firestore.Timestamp.fromDate(new Date()),
