@@ -33,7 +33,7 @@ module.exports = class Receiver {
                 }
                 
                 response = Responder.genGetStartedMsgElements();
-                
+
             } else if(payload == "MAIN MENU" && userState == "") {
                 response = (Responder.genMainMenuElements());
                 userState = "";
@@ -48,21 +48,21 @@ module.exports = class Receiver {
                 userState = "";
             } else if(payload.startsWith("STORE_CONTACT_NUMBER") && userState == "") {
                 response = (Responder.genHandoffMsg(payload));
-            } else if(payload.startsWith("HANDOFF") && userState == "") {
-                userState = "QUIET_MODE";
-                response = await Responder.genHandoffSequence(user, payload);
-                let firstMessage = await Helper.genMessageJson("Welcome! I'm your personal shopper for today. How may I help you?");
-                StoreData.saveQuietModeMsg(user, firstMessage, "us");
-            } else if(payload.toUpperCase() == "EXIT" && userState == "QUIET_MODE") {
-                response = await Responder.genExitQuietModeMsg();
-            } else if(payload == "CONFIRM_EXIT" && userState == "QUIET_MODE") {
-                userState = "";
-                await StoreData.updateCurrentSession(user, "");
-                response = await Responder.genConfirmExitQuietModeMsg();
-                console.log(user.name, " is quitting QUIET_MODE");
-                console.log("userState in confirm_exit", userState);
-            } else if(payload == "CANCEL_EXIT" && userState == "QUIET_MODE") {
-                response = await Responder.genCancelExitQuietModeMsg();
+            // } else if(payload.startsWith("HANDOFF") && userState == "") {
+            //     userState = "QUIET_MODE";
+            //     response = await Responder.genHandoffSequence(user, payload);
+            //     let firstMessage = await Helper.genMessageJson("Welcome! I'm your personal shopper for today. How may I help you?");
+            //     StoreData.saveQuietModeMsg(user, firstMessage, "us");
+            // } else if(payload.toUpperCase() == "EXIT" && userState == "QUIET_MODE") {
+            //     response = await Responder.genExitQuietModeMsg();
+            // } else if(payload == "CONFIRM_EXIT" && userState == "QUIET_MODE") {
+            //     userState = "";
+            //     await StoreData.updateCurrentSession(user, "");
+            //     response = await Responder.genConfirmExitQuietModeMsg();
+            //     console.log(user.name, " is quitting QUIET_MODE");
+            //     console.log("userState in confirm_exit", userState);
+            // } else if(payload == "CANCEL_EXIT" && userState == "QUIET_MODE") {
+            //     response = await Responder.genCancelExitQuietModeMsg();
             } else {
                 if(userState == "") {
                     response = (Responder.genErrorMsgElements());
