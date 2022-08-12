@@ -37,7 +37,7 @@ module.exports = class Composer {
         let asButtons1 = TemplateBuilder.buildButtonTemplate("Call 0917111TOYS", 6, 1, true, "open-url", "viber://chat?number=%2B639171118697");
         let asButtons2 = TemplateBuilder.buildButtonTemplate("CHOOSE PREFERRED STORE", 6, 1, false, "reply", "POSTBACK|CHOOSE STORE|Choose store");
 
-        let rob = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/GoR.jpg", 6, 5, true, "none", "GoRobinsons", "SHOP ONLINE", 6, 1, true, "open-url", "https://toysrus.gorobinsons.ph");
+        let rob = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/chatbot-pix_viber-rev-GoCart.jpg", 6, 5, true, "none", "GoCart", "SHOP ONLINE", 6, 1, true, "open-url", "https://toysrus.gorobinsons.ph");
         let laz = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/LazMall.jpg", 6, 5, true, "none", "Lazada", "SHOP ONLINE", 6, 1, true, "open-url", "https://www.lazada.com.ph/shop/toys-r-us");
         let sho = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/chatbot-pix_viber-rev-Shopee.jpg", 6, 5, true, "none", "Shopee", "SHOP ONLINE", 6, 1, true, "open-url", "https://shopee.ph/toysrusph");
         let met = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/general/chatbot-pix_viber-rev-Metromart.jpg", 6, 5, true, "none", "Metromart", "SHOP ONLINE", 6, 1, true, "open-url", "metromart.com");
