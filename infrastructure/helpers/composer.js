@@ -47,7 +47,7 @@ module.exports = class Composer {
         const cards = [asImage, asButtons1, asButtons2, rob[0], rob[1], rob[2], laz[0], laz[1], laz[2], sho[0], sho[1], sho[2], met[0], met[1], met[2], cat[0], cat[1], cat[2],  cat2[0], cat2[1], cat2[2]];
 
 
-        let mainMenuElementBuild = TemplateBuilder.buildJsonTemplate(6, 7, cards);
+        let mainMenuElementBuild = TemplateBuilder.buildJsonTemplate(7, 7, cards);
         let mainMenuElement = TemplateBuilder.buildRichMediaMessage(mainMenuElementBuild);
 
         return [mainMenuMsgElement, mainMenuElement];
