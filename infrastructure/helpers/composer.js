@@ -41,10 +41,9 @@ module.exports = class Composer {
         let laz = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/LazMall.jpg", 6, 5, true, "none", "Lazada", "SHOP ONLINE", 6, 1, true, "open-url", "https://www.lazada.com.ph/shop/toys-r-us");
         let sho = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/chatbot-pix_viber-rev-Shopee.jpg", 6, 5, true, "none", "Shopee", "SHOP ONLINE", 6, 1, true, "open-url", "https://shopee.ph/toysrusph");
         let met = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/general/chatbot-pix_viber-rev-Metromart.jpg", 6, 5, true, "none", "Metromart", "SHOP ONLINE", 6, 1, true, "open-url", "https://www.metromart.com/");
-        let cat = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot-Pix_Christmas-Catalog-Book-1_Viber.jpg", 6, 5, true, "none", "Catalog", "SHOP NOW", 6, 1, true, "open-url", "https://view.publitas.com/toysrus/christmas-toybook-2022/page/1");
-        let cat2 = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot-Pix_Christmas-Catalog-Book-2_Viber.jpg", 6, 5, true, "none", "Catalog", "SHOP NOW", 6, 1, true, "open-url", "https://view.publitas.com/toysrus/christmas-toybook-book-2-2022/page/1");
+        let cat = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot-Pix_Christmas-Catalog_Viber.jpg", 6, 5, true, "none", "Catalog", "SHOP NOW", 6, 1, true, "open-url", "https://toysrus.com.ph/promos/truchristmastoybook2022");
 
-        const cards = [asImage, asButtons1, asButtons2, rob[0], rob[1], rob[2], laz[0], laz[1], laz[2], sho[0], sho[1], sho[2], met[0], met[1], met[2], cat[0], cat[1], cat[2],  cat2[0], cat2[1], cat2[2]];
+        const cards = [asImage, asButtons1, asButtons2, rob[0], rob[1], rob[2], laz[0], laz[1], laz[2], sho[0], sho[1], sho[2], met[0], met[1], met[2], cat[0], cat[1]];
 
 
         let mainMenuElementBuild = TemplateBuilder.buildJsonTemplate(7, 7, cards);
