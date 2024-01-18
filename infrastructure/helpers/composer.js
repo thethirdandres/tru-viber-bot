@@ -37,10 +37,10 @@ module.exports = class Composer {
         let asButtons1 = TemplateBuilder.buildButtonTemplate("Call 0917111TOYS", 6, 1, true, "open-url", "viber://chat?number=%2B639171118697");
         let asButtons2 = TemplateBuilder.buildButtonTemplate("CHOOSE PREFERRED STORE", 6, 1, false, "reply", "POSTBACK|CHOOSE STORE|Choose store");
 
-        let rob = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/chatbot-pix_viber-rev-GoCart.jpg", 6, 5, true, "none", "GoCart", "SHOP ONLINE", 6, 1, true, "open-url", "https://toysrus.gocart.ph");
+        let rob = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-rds-tru-prod-bucket/TRU/tru-bot-resources/chatbot-pix_viber-rev-GoCart.jpg", 6, 5, true, "none", "GoCart", "SHOP ONLINE", 6, 1, true, "open-url", "https://toysrus.gocart.ph");
         let laz = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/LazMall.jpg", 6, 5, true, "none", "Lazada", "SHOP ONLINE", 6, 1, true, "open-url", "https://www.lazada.com.ph/shop/toys-r-us");
-        let sho = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/chatbot-pix_viber-rev-Shopee.jpg", 6, 5, true, "none", "Shopee", "SHOP ONLINE", 6, 1, true, "open-url", "https://shopee.ph/toysrusph");
-        let met = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/general/chatbot-pix_viber-rev-Metromart.jpg", 6, 5, true, "none", "Metromart", "SHOP ONLINE", 6, 1, true, "open-url", "https://www.metromart.com/");
+        let sho = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-rds-tru-prod-bucket/TRU/tru-bot-resources/chatbot-pix_viber-rev-Shopee.jpg", 6, 5, true, "none", "Shopee", "SHOP ONLINE", 6, 1, true, "open-url", "https://shopee.ph/toysrusph");
+        let met = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-rds-tru-prod-bucket/TRU/tru-bot-resources/chatbot-pix_viber-rev-Metromart.jpg", 6, 5, true, "none", "Metromart", "SHOP ONLINE", 6, 1, true, "open-url", "https://www.metromart.com/");
         let cat = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot-Pix_Christmas-Catalog_Viber.jpg", 6, 5, true, "none", "Catalog", "SHOP NOW", 6, 1, true, "open-url", "https://toysrus.com.ph/promos/truchristmastoybook2022");
 
         const cards = [asImage, asButtons1, asButtons2, rob[0], rob[1], rob[2], laz[0], laz[1], laz[2], sho[0], sho[1], sho[2], met[0], met[1], met[2]];
@@ -56,8 +56,8 @@ module.exports = class Composer {
         let learnMoreMsgElement = TemplateBuilder.buildTextMessage('Sure! 👍 What would you like to learn more about?');
 
         let promosEvents = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/chatbot-viber-girlsfair.jpg", 6, 5, true, "none", "Promos and Events", "SELECT", 6, 1, true, "open-url", "https://toysrus.com.ph/catalog");
-        let howShopPlay = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/others/csp-how-it-works.jpg", 6, 5, true, "none","How to Call Shop Play?", "SELECT", 6, 1, true, "open-url", "https://toysrus.com.ph/calltoorder");
-        let returnExchange = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/others/return-and-exchange-policy.jpg", 6, 5, true, "none","Return and Exchange Policy", "SELECT", 6, 1, true, "open-url", "https://toysrus.com.ph/services");
+        let howShopPlay = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-rds-tru-prod-bucket/TRU/tru-bot-resources/CSP-HowItWorks%20(1019).jpg", 6, 5, true, "none","How to Call Shop Play?", "SELECT", 6, 1, true, "open-url", "https://toysrus.com.ph/calltoorder");
+        let returnExchange = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-rds-tru-prod-bucket/TRU/tru-bot-resources/Return-and-Exchange%20(1019).jpg", 6, 5, true, "none","Return and Exchange Policy", "SELECT", 6, 1, true, "open-url", "https://toysrus.com.ph/services");
         const cards = [howShopPlay[0], howShopPlay[1], howShopPlay[2], returnExchange[0], returnExchange[1], returnExchange[2]];
 
 
