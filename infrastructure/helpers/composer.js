@@ -38,7 +38,7 @@ module.exports = class Composer {
         let asButtons2 = TemplateBuilder.buildButtonTemplate("CHOOSE PREFERRED STORE", 6, 1, false, "reply", "POSTBACK|CHOOSE STORE|Choose store");
 
         let rob = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-rds-tru-prod-bucket/TRU/tru-bot-resources/chatbot-pix_viber-rev-GoCart.jpg", 6, 5, true, "none", "GoCart", "SHOP ONLINE", 6, 1, true, "open-url", "https://toysrus.gocart.ph");
-        let laz = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/online%20stores/LazMall.jpg", 6, 5, true, "none", "Lazada", "SHOP ONLINE", 6, 1, true, "open-url", "https://www.lazada.com.ph/shop/toys-r-us");
+        let laz = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-rds-tru-prod-bucket/TRU/tru-bot-resources/LazMall.jpg", 6, 5, true, "none", "Lazada", "SHOP ONLINE", 6, 1, true, "open-url", "https://www.lazada.com.ph/shop/toys-r-us");
         let sho = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-rds-tru-prod-bucket/TRU/tru-bot-resources/chatbot-pix_viber-rev-Shopee.jpg", 6, 5, true, "none", "Shopee", "SHOP ONLINE", 6, 1, true, "open-url", "https://shopee.ph/toysrusph");
         let met = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-rds-tru-prod-bucket/TRU/tru-bot-resources/chatbot-pix_viber-rev-Metromart.jpg", 6, 5, true, "none", "Metromart", "SHOP ONLINE", 6, 1, true, "open-url", "https://www.metromart.com/");
         let cat = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot-Pix_Christmas-Catalog_Viber.jpg", 6, 5, true, "none", "Catalog", "SHOP NOW", 6, 1, true, "open-url", "https://toysrus.com.ph/promos/truchristmastoybook2022");
@@ -70,11 +70,11 @@ module.exports = class Composer {
     static composeChooseStoreElements() {
         let chooseStoreMsgElement = TemplateBuilder.buildTextMessage('Swipe ➡ through the options below 👇');
         
-        let metroManila = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/manila.jpg", 6, 5, true, "none", "Find stores in Metro Manila", "METRO MANILA", 6, 1, false, "reply", "POSTBACK|METRO MANILA|Metro Manila");
+        let metroManila = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-rds-tru-prod-bucket/TRU/tru-bot-resources/manila.jpg", 6, 5, true, "none", "Find stores in Metro Manila", "METRO MANILA", 6, 1, false, "reply", "POSTBACK|METRO MANILA|Metro Manila");
         
-        let luzon = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/luzon.jpg", 6, 5, true, "none", "Find stores in Luzon", "LUZON", 6, 1, false, "reply", "POSTBACK|LUZON|Luzon");
+        let luzon = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-rds-tru-prod-bucket/TRU/tru-bot-resources/luzon.jpg", 6, 5, true, "none", "Find stores in Luzon", "LUZON", 6, 1, false, "reply", "POSTBACK|LUZON|Luzon");
         
-        let visMin = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-img-resources/tru-resources/Chatbot%20Pictures/places/visayas.jpg", 6, 5, true, "none", "Find stores in Visayas and Mindanao", "VISAYAS & MINDANAO", 6, 1, false, "reply", "POSTBACK|VISMIN|VisMin");
+        let visMin = TemplateBuilder.buildImageTitleButtonTemplate("https://storage.googleapis.com/avigate-rds-tru-prod-bucket/TRU/tru-bot-resources/visayas.jpg", 6, 5, true, "none", "Find stores in Visayas and Mindanao", "VISAYAS & MINDANAO", 6, 1, false, "reply", "POSTBACK|VISMIN|VisMin");
         
         const cards = [metroManila[0], metroManila[1], metroManila[2], luzon[0], luzon[1], luzon[2], visMin[0], visMin[1], visMin[2]];
 
