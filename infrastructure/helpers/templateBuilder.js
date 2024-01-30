@@ -109,7 +109,7 @@ module.exports = class TemplateBuilder {
                     "Silent": true,
                     "ActionType": "reply",
                     "ActionBody": "POSTBACK|MAIN MENU|Main Menu",
-                    "Image": "https://storage.googleapis.com/avigate-rds-tru-prod-bucket/TRU/Viber/MENU.png",
+                    "Image": "https://storage.googleapis.com/avigate-rds-tru-prod-bucket/RDS/viber/keyboard-buttons/MENU.png",
                     "ImageScaleType": "fill"
                 },
                 {
@@ -118,7 +118,7 @@ module.exports = class TemplateBuilder {
                     "Silent": true,
                     "ActionType": "reply",
                     "ActionBody": "POSTBACK|LEARN MORE|Learn More",
-                    "Image": "https://storage.googleapis.com/avigate-rds-tru-prod-bucket/TRU/Viber/LEARN.png",
+                    "Image": "https://storage.googleapis.com/avigate-rds-tru-prod-bucket/RDS/viber/keyboard-buttons/LEARN.png",
                     "ImageScaleType": "fill"
                 },
                 {
